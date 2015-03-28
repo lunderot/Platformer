@@ -1,8 +1,9 @@
 #include "AssetHandler.h"
 
-AssetHandler::AssetHandler(SDL_Renderer* renderer)
+AssetHandler::AssetHandler(SDL_Renderer* renderer, std::string path)
 {
 	this->renderer = renderer;
+	this->path = path;
 }
 
 AssetHandler::~AssetHandler()
@@ -31,11 +32,12 @@ SDL_Texture* AssetHandler::GetTexture(std::string filename)
 SDL_Texture* AssetHandler::LoadTexture(std::string filename)
 {
 	SDL_Texture* returnTexture;
-	SDL_Surface* tempSurface = SDL_LoadBMP(filename.c_str());
+	std::string tempFilename = path + filename;
+	SDL_Surface* tempSurface = SDL_LoadBMP(tempFilename.c_str());
 
 	if (!tempSurface)
 	{
-		throw std::runtime_error("Failed to load texture: " + filename);
+		throw std::runtime_error("Failed to load texture: " + tempFilename);
 	}
 	returnTexture = SDL_CreateTextureFromSurface(renderer, tempSurface);
 	if (!returnTexture)

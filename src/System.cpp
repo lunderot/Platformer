@@ -19,7 +19,7 @@ System::System(Vec2i screenSize)
 	}
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 
-	assetHandler = new AssetHandler(renderer);
+	assetHandler = new AssetHandler(renderer, "assets/textures/");
 }
 
 
@@ -51,9 +51,9 @@ void System::Run()
 		SDL_RenderClear(renderer);
 
 		SDL_Rect dest = { 0, 0, 0, 0 };
-		SDL_QueryTexture(assetHandler->GetTexture("assets/textures/test.bmp"), nullptr, nullptr, &dest.w, &dest.h);
+		SDL_QueryTexture(assetHandler->GetTexture("test.bmp"), nullptr, nullptr, &dest.w, &dest.h);
 
-		SDL_RenderCopy(renderer, assetHandler->GetTexture("assets/textures/test.bmp"), nullptr, &dest);
+		SDL_RenderCopy(renderer, assetHandler->GetTexture("test.bmp"), nullptr, &dest);
 
 		SDL_RenderPresent(renderer);
 	}
