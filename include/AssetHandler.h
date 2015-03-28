@@ -4,6 +4,7 @@
 #include <map>
 
 #include <SDL.h>
+#include <SDL_image.h>
 
 class AssetHandler
 {

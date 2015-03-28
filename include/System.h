@@ -4,6 +4,7 @@
 #include <exception>
 
 #include <SDL.h>
+#include <SDL_image.h>
 
 #include "math\Vec2.h"
 

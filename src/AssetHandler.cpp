@@ -33,7 +33,7 @@ SDL_Texture* AssetHandler::LoadTexture(std::string filename)
 {
 	SDL_Texture* returnTexture;
 	std::string tempFilename = path + filename;
-	SDL_Surface* tempSurface = SDL_LoadBMP(tempFilename.c_str());
+	SDL_Surface* tempSurface = IMG_Load(tempFilename.c_str());
 
 	if (!tempSurface)
 	{
