@@ -1,14 +1,14 @@
 #include <iostream>
 #include <SDL.h>
 
-#include "System.h"
+#include "Application.h"
 
 int main(int argc, char* argv[])
 {
 	try
 	{
-		System system(Vec2i(1280, 720));
-		system.Run();
+		Application app(Vec2i(1280, 720), "Hey!");
+		app.Run();
 	}
 	catch (std::exception e)
 	{

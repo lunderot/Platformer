@@ -6,7 +6,6 @@
 #include <SDL.h>
 
 #include "math\Vec2.h"
-#include "AssetHandler.h"
 
 class System
 {
@@ -14,17 +13,20 @@ private:
 	Vec2i screenSize;
 	bool running;
 
-	AssetHandler* assetHandler;
-
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	SDL_Event event;
-
 	
 public:
-	System(Vec2i screenSize);
-	~System();
+	System(Vec2i screenSize, std::string title);
+	virtual ~System();
 
 	void Run();
+	SDL_Renderer* GetRenderer() const;
+	SDL_Window* GetWindow() const;
+
+	virtual void HandleEvent(SDL_Event& event) = 0;
+	virtual void Update(float deltaTime) = 0;
+	virtual void Render() = 0;
 };
 

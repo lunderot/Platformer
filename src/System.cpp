@@ -1,13 +1,13 @@
 #include "System.h"
 
-System::System(Vec2i screenSize)
+System::System(Vec2i screenSize, std::string title)
 {
 	this->screenSize = screenSize;
-	running = true;
+	this->running = true;
 
 	SDL_Init(SDL_INIT_VIDEO);
 
-	window = SDL_CreateWindow("Platformer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenSize.x, screenSize.y, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenSize.x, screenSize.y, SDL_WINDOW_SHOWN);
 	if (!window)
 	{
 		throw std::runtime_error("Failed to create SDL window");
@@ -18,15 +18,10 @@ System::System(Vec2i screenSize)
 		throw std::runtime_error("Failed to create SDL renderer");
 	}
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-
-	assetHandler = new AssetHandler(renderer, "assets/textures/");
 }
-
 
 System::~System()
 {
-	delete assetHandler;
-
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
@@ -38,6 +33,7 @@ void System::Run()
 		//Handle SDL events
 		while (SDL_PollEvent(&event) != 0)
 		{
+			HandleEvent(event);
 			switch (event.type)
 			{
 			case SDL_QUIT:
@@ -47,14 +43,21 @@ void System::Run()
 				break;
 			}
 		}
+		//Update 
+		Update(0.1f);
 		//Render
 		SDL_RenderClear(renderer);
-
-		SDL_Rect dest = { 0, 0, 0, 0 };
-		SDL_QueryTexture(assetHandler->GetTexture("test.bmp"), nullptr, nullptr, &dest.w, &dest.h);
-
-		SDL_RenderCopy(renderer, assetHandler->GetTexture("test.bmp"), nullptr, &dest);
-
+		Render();
 		SDL_RenderPresent(renderer);
 	}
+}
+
+SDL_Renderer* System::GetRenderer() const
+{
+	return renderer;
+}
+
+SDL_Window* System::GetWindow() const
+{
+	return window;
 }
