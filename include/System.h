@@ -22,6 +22,7 @@ public:
 	virtual ~System();
 
 	void Run();
+	Vec2i GetScreenSize() const;
 	SDL_Renderer* GetRenderer() const;
 	SDL_Window* GetWindow() const;
 

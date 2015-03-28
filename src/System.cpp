@@ -52,6 +52,11 @@ void System::Run()
 	}
 }
 
+Vec2i System::GetScreenSize() const
+{
+	return screenSize;
+}
+
 SDL_Renderer* System::GetRenderer() const
 {
 	return renderer;
