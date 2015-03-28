@@ -7,7 +7,7 @@ int main(int argc, char* argv[])
 {
 	try
 	{
-		Application app(Vec2i(1280, 720), "Hey!");
+		Application app(Vec2i(1280, 720), "Platformer");
 		app.Run();
 	}
 	catch (std::exception e)

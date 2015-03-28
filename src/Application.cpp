@@ -15,12 +15,6 @@ void Application::HandleEvent(SDL_Event& event)
 {
 	switch (event.type)
 	{
-	case SDL_MOUSEBUTTONDOWN:
-		if (event.button.clicks == 5)
-		{
-			std::cout << "5 clicks" << std::endl;
-		}
-		break;
 	default:
 		break;
 	}
