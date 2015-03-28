@@ -70,10 +70,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\AssetHandler.cpp" />
     <ClCompile Include="src\System.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\AssetHandler.h" />
     <ClInclude Include="include\System.h" />
     <ClInclude Include="include\math\Vec2.h" />
   </ItemGroup>
