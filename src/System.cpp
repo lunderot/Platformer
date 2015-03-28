@@ -44,7 +44,7 @@ void System::Run()
 			}
 		}
 		//Update 
-		Update(0.1f);
+		Update(0.001f);
 		//Render
 		SDL_RenderClear(renderer);
 		Render();

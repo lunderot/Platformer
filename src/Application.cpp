@@ -2,19 +2,24 @@
 
 Application::Application(Vec2i screenSize, std::string title) : System(screenSize, title)
 {
-	this->assetHandler = new AssetHandler(GetRenderer(), "assets/textures/");
+	assetHandler = new AssetHandler(GetRenderer(), "assets/textures/");
+	player = new Player(assetHandler->GetTexture("test.bmp"), Vec2f(32, 32), Vec2f(10, 20), Vec2f(0, -20), Vec2f(0, 10));
 }
 
 
 Application::~Application()
 {
 	delete assetHandler;
+	delete player;
 }
 
 void Application::HandleEvent(SDL_Event& event)
 {
 	switch (event.type)
 	{
+	case SDL_MOUSEBUTTONDOWN:
+		player->SetPosition(Vec2f(event.button.x, event.button.y));
+		break;
 	default:
 		break;
 	}
@@ -22,12 +27,10 @@ void Application::HandleEvent(SDL_Event& event)
 
 void Application::Update(float deltaTime)
 {
-
+	player->Update(deltaTime);
 }
 
 void Application::Render()
 {
-	SDL_Rect dest = { 0, 0, 0, 0 };
-	SDL_QueryTexture(assetHandler->GetTexture("test.bmp"), nullptr, nullptr, &dest.w, &dest.h);
-	SDL_RenderCopy(GetRenderer(), assetHandler->GetTexture("test.bmp"), nullptr, &dest);
+	player->Render(GetRenderer());
 }
