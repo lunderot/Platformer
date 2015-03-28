@@ -5,12 +5,13 @@
 #include "System.h"
 #include "AssetHandler.h"
 #include "Player.h"
+#include "EntityHandler.h"
 
 class Application: public System
 {
 private:
 	AssetHandler* assetHandler;
-	Entity* player;
+	EntityHandler* entityHandler;
 public:
 	Application(Vec2i screenSize, std::string title);
 	virtual ~Application();

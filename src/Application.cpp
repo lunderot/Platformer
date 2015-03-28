@@ -3,23 +3,23 @@
 Application::Application(Vec2i screenSize, std::string title) : System(screenSize, title)
 {
 	assetHandler = new AssetHandler(GetRenderer(), "assets/textures/");
-	player = new Player(assetHandler->GetTexture("test.bmp"), Vec2f(32, 32), Vec2f(10, 20), Vec2f(0, -20), Vec2f(0, 10));
+
+	entityHandler = new EntityHandler();
+	entityHandler->Add(new Player(assetHandler->GetTexture("test.bmp"), Vec2f(32, 32), Vec2f(10, 20)));
+	entityHandler->Add(new Player(assetHandler->GetTexture("test.bmp"), Vec2f(64, 64), Vec2f(52, 20)));
 }
 
 
 Application::~Application()
 {
 	delete assetHandler;
-	delete player;
+	delete entityHandler;
 }
 
 void Application::HandleEvent(SDL_Event& event)
 {
 	switch (event.type)
 	{
-	case SDL_MOUSEBUTTONDOWN:
-		player->SetPosition(Vec2f(event.button.x, event.button.y));
-		break;
 	default:
 		break;
 	}
@@ -27,10 +27,10 @@ void Application::HandleEvent(SDL_Event& event)
 
 void Application::Update(float deltaTime)
 {
-	player->Update(deltaTime);
+	entityHandler->Update(deltaTime);
 }
 
 void Application::Render()
 {
-	player->Render(GetRenderer());
+	entityHandler->Render(GetRenderer());
 }
