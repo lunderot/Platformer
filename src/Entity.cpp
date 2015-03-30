@@ -15,6 +15,18 @@ Entity::~Entity()
 {
 }
 
+void Entity::Render(SDL_Renderer* renderer)
+{
+	SDL_Rect destination =
+	{
+		static_cast<int>(position.x),
+		static_cast<int>(position.y),
+		static_cast<int>(size.x),
+		static_cast<int>(size.y)
+	};
+	SDL_RenderCopy(renderer, texture, nullptr, &destination);
+}
+
 Box Entity::GetBoundingBox() const
 {
 	return Box(position, size);

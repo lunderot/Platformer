@@ -15,9 +15,3 @@ void Player::Update(float deltaTime)
 {
 	
 }
-
-void Player::Render(SDL_Renderer* renderer)
-{
-	SDL_Rect destination = { position.x, position.y, size.x, size.y };
-	SDL_RenderCopy(renderer, texture, nullptr, &destination);
-}

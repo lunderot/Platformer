@@ -8,6 +8,5 @@ public:
 	~Player();
 
 	void Update(float deltaTime);
-	void Render(SDL_Renderer* renderer);
 };
 
