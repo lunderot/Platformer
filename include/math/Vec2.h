@@ -15,7 +15,7 @@ public:
 
 	T length() const;
 	Vec2<T> normalized() const;
-	T dot(const T& other) const;
+	T dot(const Vec2<T>& other) const;
 
 	Vec2<T>& operator+=(const Vec2<T>& other);
 	Vec2<T>& operator-=(const Vec2<T>& other);
@@ -57,7 +57,7 @@ Vec2<T> Vec2<T>::normalized() const
 }
 
 template <typename T>
-T Vec2<T>::dot(const T& other) const
+T Vec2<T>::dot(const Vec2<T>& other) const
 {
 	return (x * other.x) + (y * other.y);
 }
