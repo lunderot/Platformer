@@ -26,8 +26,8 @@ public:
 	void SetVelocity(Vec2f velocity);
 	void SetAcceleration(Vec2f acceleration);
 
-	Vec2f GetPosition(Vec2f position) const;
-	Vec2f GetVelocity(Vec2f velocity) const;
-	Vec2f GetAcceleration(Vec2f acceleration) const;
+	Vec2f GetPosition() const;
+	Vec2f GetVelocity() const;
+	Vec2f GetAcceleration() const;
 };
 

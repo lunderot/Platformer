@@ -15,6 +15,11 @@ Entity::~Entity()
 {
 }
 
+Box Entity::GetBoundingBox() const
+{
+	return Box(position, size);
+}
+
 void Entity::SetPosition(Vec2f position)
 {
 	this->position = position;
@@ -30,17 +35,17 @@ void Entity::SetAcceleration(Vec2f acceleration)
 	this->acceleration = acceleration;
 }
 
-Vec2f Entity::GetPosition(Vec2f position) const
+Vec2f Entity::GetPosition() const
 {
 	return position;
 }
 
-Vec2f Entity::GetVelocity(Vec2f velocity) const
+Vec2f Entity::GetVelocity() const
 {
 	return velocity;
 }
 
-Vec2f Entity::GetAcceleration(Vec2f acceleration) const
+Vec2f Entity::GetAcceleration() const
 {
 	return acceleration;
 }
