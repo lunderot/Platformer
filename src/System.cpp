@@ -35,6 +35,9 @@ System::~System()
 
 void System::Run()
 {
+	float dt = 1 / 60.0f;
+	float currentTime = SDL_GetTicks() / 1000.0f;
+
 	while (running)
 	{
 		//Handle SDL events
@@ -50,8 +53,18 @@ void System::Run()
 				break;
 			}
 		}
-		//Update 
-		Update(0.001f);
+		//Update
+		float newTime = SDL_GetTicks() / 1000.0f;
+		float frameTime = newTime - currentTime;
+		currentTime = newTime;
+		
+		while (frameTime > 0.0f)
+		{
+			float deltaTime = std::min(frameTime, dt);
+			Update(deltaTime);
+			frameTime -= deltaTime;
+		}
+		
 		//Render
 		SDL_RenderClear(renderer);
 		Render();

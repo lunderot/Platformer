@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <exception>
+#include <algorithm>
 
 #include <SDL.h>
 #include <SDL_image.h>
