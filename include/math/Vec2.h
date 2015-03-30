@@ -13,9 +13,9 @@ public:
 	Vec2(T x = 0, T y = 0);
 	~Vec2();
 
-	T length() const;
-	Vec2<T> normalized() const;
-	T dot(const Vec2<T>& other) const;
+	T Length() const;
+	Vec2<T> Normalized() const;
+	T Dot(const Vec2<T>& other) const;
 
 	Vec2<T>& operator+=(const Vec2<T>& other);
 	Vec2<T>& operator-=(const Vec2<T>& other);
@@ -44,20 +44,20 @@ Vec2<T>::~Vec2()
 }
 
 template <typename T>
-T Vec2<T>::length() const
+T Vec2<T>::Length() const
 {
 	return sqrt(x * x + y * y);
 }
 
 template <typename T>
-Vec2<T> Vec2<T>::normalized() const
+Vec2<T> Vec2<T>::Normalized() const
 {
-	T len = length();
+	T len = Length();
 	return Vec2<T>(x / l, y / l);
 }
 
 template <typename T>
-T Vec2<T>::dot(const Vec2<T>& other) const
+T Vec2<T>::Dot(const Vec2<T>& other) const
 {
 	return (x * other.x) + (y * other.y);
 }
