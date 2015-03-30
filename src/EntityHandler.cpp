@@ -19,6 +19,9 @@ void EntityHandler::Update(float deltaTime)
 	for (std::vector<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 	{
 		(*i)->Update(deltaTime);
+
+		(*i)->velocity += (*i)->acceleration * deltaTime;
+		(*i)->position += (*i)->velocity * deltaTime;
 	}
 }
 

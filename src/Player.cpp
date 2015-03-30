@@ -13,8 +13,7 @@ Player::~Player()
 
 void Player::Update(float deltaTime)
 {
-	velocity += acceleration * deltaTime;
-	position += velocity * deltaTime;
+	
 }
 
 void Player::Render(SDL_Renderer* renderer)

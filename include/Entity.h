@@ -6,6 +6,7 @@
 
 class Entity
 {
+	friend class EntityHandler;
 protected:
 	SDL_Texture* texture;
 	Vec2f size;
