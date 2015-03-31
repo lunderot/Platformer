@@ -17,7 +17,6 @@ System::System(Vec2i screenSize, std::string title)
 	{
 		throw std::runtime_error("Failed to create SDL renderer");
 	}
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 
 	int imgFlags = IMG_INIT_PNG;
 	if (!IMG_Init(imgFlags) & imgFlags)
@@ -66,6 +65,7 @@ void System::Run()
 		}
 		
 		//Render
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 		SDL_RenderClear(renderer);
 		Render();
 		SDL_RenderPresent(renderer);

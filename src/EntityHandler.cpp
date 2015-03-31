@@ -3,8 +3,13 @@
 
 EntityHandler::EntityHandler()
 {
-	collisionLines.push_back(new LineSegment(Vec2f(0, 0), Vec2f(500, 400)));
-	collisionLines.push_back(new LineSegment(Vec2f(500, 400), Vec2f(1000, 400)));
+	Vec2f offset(500, 300);
+	float factor = 400.0f;
+	for (int i = 0; i < 18*10; i++)
+	{
+		float m = 20.0f * 0.0174532925f / 10.0f;
+		collisionLines.push_back(new LineSegment(offset + Vec2f(cos(i * m)*factor, sin(i * m)*factor), offset + Vec2f(cos((i + 1) * m)*factor, sin((i + 1) * m)*factor)));
+	}
 }
 
 
@@ -61,7 +66,6 @@ void EntityHandler::Render(SDL_Renderer* renderer)
 	{
 		SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
 		SDL_RenderDrawLine(renderer, (*j)->point[0].x, (*j)->point[0].y, (*j)->point[1].x, (*j)->point[1].y);
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 	}
 	
 }
