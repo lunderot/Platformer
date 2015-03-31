@@ -19,8 +19,8 @@ void Entity::Render(SDL_Renderer* renderer)
 {
 	SDL_Rect destination =
 	{
-		static_cast<int>(position.x - radius / 2),
-		static_cast<int>(position.y - radius / 2),
+		static_cast<int>(position.x - radius),
+		static_cast<int>(position.y - radius),
 		static_cast<int>(radius * 2),
 		static_cast<int>(radius * 2)
 	};
