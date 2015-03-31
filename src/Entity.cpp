@@ -1,10 +1,10 @@
 #include "Entity.h"
 
 
-Entity::Entity(SDL_Texture* texture, Vec2f size, Vec2f position, Vec2f velocity, Vec2f acceleration)
+Entity::Entity(SDL_Texture* texture, float radius, Vec2f position, Vec2f velocity, Vec2f acceleration)
 {
 	this->texture = texture;
-	this->size = size;
+	this->radius = radius;
 	this->position = position;
 	this->velocity = velocity;
 	this->acceleration = acceleration;
@@ -19,17 +19,17 @@ void Entity::Render(SDL_Renderer* renderer)
 {
 	SDL_Rect destination =
 	{
-		static_cast<int>(position.x),
-		static_cast<int>(position.y),
-		static_cast<int>(size.x),
-		static_cast<int>(size.y)
+		static_cast<int>(position.x - radius / 2),
+		static_cast<int>(position.y - radius / 2),
+		static_cast<int>(radius * 2),
+		static_cast<int>(radius * 2)
 	};
 	SDL_RenderCopy(renderer, texture, nullptr, &destination);
 }
 
-Box Entity::GetBoundingBox() const
+Circle Entity::GetBoundingCircle() const
 {
-	return Box(position, size);
+	return Circle(position, radius);
 }
 
 void Entity::SetPosition(Vec2f position)

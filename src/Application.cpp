@@ -5,8 +5,8 @@ Application::Application(Vec2i screenSize, std::string title) : System(screenSiz
 	assetHandler = new AssetHandler(GetRenderer(), "assets/textures/");
 
 	entityHandler = new EntityHandler();
-	entityHandler->Add(new Player(assetHandler->GetTexture("tiles/castleCliffLeftAlt.png"), Vec2f(70, 70), Vec2f(0, 0), Vec2f(10, 10), Vec2f(3, 3)));
-	entityHandler->Add(new Player(assetHandler->GetTexture("tiles/box.png"), Vec2f(70, 70), Vec2f(120, 120)));
+	entityHandler->Add(new Player(assetHandler->GetTexture("tiles/castleCliffLeftAlt.png"), 35, Vec2f(300, 100), Vec2f(100, 0), Vec2f(0, 300)));
+	entityHandler->Add(new Player(assetHandler->GetTexture("tiles/box.png"), 35, Vec2f(170, 120), Vec2f(30, 300) ));
 }
 
 

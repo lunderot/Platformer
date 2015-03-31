@@ -7,6 +7,7 @@
 class EntityHandler
 {
 	std::vector<Entity*> entities;
+	std::vector<LineSegment*> collisionLines;
 public:
 	EntityHandler();
 	~EntityHandler();
