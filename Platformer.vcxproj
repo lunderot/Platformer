@@ -75,6 +75,8 @@
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\EntityHandler.cpp" />
     <ClCompile Include="src\math\Box.cpp" />
+    <ClCompile Include="src\math\Circle.cpp" />
+    <ClCompile Include="src\math\LineSegment.cpp" />
     <ClCompile Include="src\math\Math.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\System.cpp" />
@@ -86,6 +88,8 @@
     <ClInclude Include="include\Entity.h" />
     <ClInclude Include="include\EntityHandler.h" />
     <ClInclude Include="include\math\Box.h" />
+    <ClInclude Include="include\math\Circle.h" />
+    <ClInclude Include="include\math\LineSegment.h" />
     <ClInclude Include="include\math\Math.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\System.h" />

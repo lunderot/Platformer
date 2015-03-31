@@ -91,3 +91,42 @@ float SweptAABB(Box box1, Vec2f box1vel, Box box2, Vec2f box2vel, Vec2f& normal)
 		return entryTime;
 	}
 }
+
+Vec2f ClosestPoint(LineSegment line, Circle circle)
+{
+	Vec2f seg = line.point[1] - line.point[0];
+	Vec2f pt = circle.position - line.point[0];
+	if (seg.Length() <= 0.0f)
+	{
+		throw std::runtime_error("Invalid line segment length");
+	}
+	Vec2f seg_unit = seg.Normalized();
+	float proj = pt.Dot(seg_unit);
+	if (proj <= 0.0f)
+	{
+		return line.point[0];
+	}
+	if (proj >= seg.Length())
+	{
+		return line.point[1];
+	}
+	Vec2f proj_v = seg_unit * proj;
+	Vec2f closest = proj_v + line.point[0];
+	return closest;
+}
+
+Vec2f LineSegmentCircleCollision(LineSegment line, Circle circle)
+{
+	Vec2f closest = ClosestPoint(line, circle);
+	Vec2f dist = circle.position - closest;
+	if (dist.Length() > circle.radius)
+	{
+		return Vec2f(0.0f, 0.0f);
+	}
+	if (dist.Length() <= 0.0f)
+	{
+		throw std::runtime_error("Circle's center is exactly on segment");
+	}
+	Vec2f offset = dist.Normalized() * (circle.radius - dist.Length());
+	return offset;
+}
