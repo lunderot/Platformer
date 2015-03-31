@@ -53,7 +53,7 @@ template <typename T>
 Vec2<T> Vec2<T>::Normalized() const
 {
 	T len = Length();
-	return Vec2<T>(x / l, y / l);
+	return Vec2<T>(x / len, y / len);
 }
 
 template <typename T>
