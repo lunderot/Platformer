@@ -16,7 +16,7 @@ namespace ScriptHandler
 		extern EntityHandler* entityHandler;
 
 		//Lua functions
-		static int CustomPrint(lua_State* ls);
+		
 	}
 
 	//C++ functions
