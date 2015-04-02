@@ -10,7 +10,6 @@ Application::Application(Vec2i screenSize, std::string title) : System(screenSiz
 
 	ScriptHandler::Init("assets/scripts/", entityHandler);
 	ScriptHandler::AddFile("test.lua");
-	ScriptHandler::TriggerEvent("test", 0);
 }
 
 
@@ -25,6 +24,13 @@ void Application::HandleEvent(SDL_Event& event)
 {
 	switch (event.type)
 	{
+	case SDL_MOUSEBUTTONUP:
+	case SDL_MOUSEBUTTONDOWN:
+		ScriptHandler::TriggerEvent(event.button);
+		break;
+	case SDL_MOUSEMOTION:
+		ScriptHandler::TriggerEvent(event.motion);
+		break;
 	default:
 		break;
 	}

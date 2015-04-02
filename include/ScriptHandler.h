@@ -21,7 +21,11 @@ namespace ScriptHandler
 
 	//C++ functions
 	void AddFile(std::string filename);
+
 	void TriggerEvent(std::string id, int eventData);
+	void TriggerEvent(SDL_MouseButtonEvent event);
+	void TriggerEvent(SDL_MouseMotionEvent event);
+
 	void Init(std::string scriptPath, EntityHandler* entityHandler);
 	void Close();
 };
