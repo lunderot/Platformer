@@ -1,0 +1,27 @@
+#pragma once
+#include <iostream>
+#include <string>
+
+#include "EntityHandler.h"
+
+#include "lua/lua.hpp"
+
+namespace ScriptHandler
+{
+	namespace Internal
+	{
+		extern lua_State* ls;
+
+		extern std::string scriptPath;
+		extern EntityHandler* entityHandler;
+
+		//Lua functions
+		static int CustomPrint(lua_State* ls);
+	}
+
+	//C++ functions
+	void AddFile(std::string filename);
+	void TriggerEvent(std::string id, int eventData);
+	void Init(std::string scriptPath, EntityHandler* entityHandler);
+	void Close();
+};

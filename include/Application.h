@@ -6,6 +6,7 @@
 #include "AssetHandler.h"
 #include "Player.h"
 #include "EntityHandler.h"
+#include "ScriptHandler.h"
 
 class Application: public System
 {
