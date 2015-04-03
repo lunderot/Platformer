@@ -5,10 +5,9 @@ Application::Application(Vec2i screenSize, std::string title) : System(screenSiz
 	assetHandler = new AssetHandler(GetRenderer(), "assets/textures/");
 
 	entityHandler = new EntityHandler();
-	entityHandler->Add(new Player(assetHandler->GetTexture("tiles/castleCliffLeftAlt.png"), 35, Vec2f(300, 100), Vec2f(100, 0), Vec2f(0, 300)));
-	entityHandler->Add(new Player(assetHandler->GetTexture("tiles/box.png"), 35, Vec2f(170, 120), Vec2f(30, 300) ));
+	entityHandler->Add(new Player(assetHandler->GetTexture("tiles/boxAlt.png"), 35, Vec2f(300, 100), Vec2f(100, 0), Vec2f(0, 300)));
 
-	ScriptHandler::Init("assets/scripts/", entityHandler);
+	ScriptHandler::Init("assets/scripts/", entityHandler, assetHandler);
 	ScriptHandler::AddFile("test.lua");
 }
 
@@ -30,6 +29,10 @@ void Application::HandleEvent(SDL_Event& event)
 		break;
 	case SDL_MOUSEMOTION:
 		ScriptHandler::TriggerEvent(event.motion);
+		break;
+	case SDL_KEYDOWN:
+	case SDL_KEYUP:
+		ScriptHandler::TriggerEvent(event.key);
 		break;
 	default:
 		break;
