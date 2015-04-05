@@ -13,6 +13,7 @@ class Application: public System
 private:
 	AssetHandler* assetHandler;
 	EntityHandler* entityHandler;
+	ScriptHandler* scriptHandler;
 public:
 	Application(Vec2i screenSize, std::string title);
 	virtual ~Application();

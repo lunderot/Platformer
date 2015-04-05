@@ -81,6 +81,7 @@
     <ClCompile Include="src\math\Math.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\ScriptHandler.cpp" />
+    <ClCompile Include="src\ScriptHandlerInternal.cpp" />
     <ClCompile Include="src\System.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
@@ -100,6 +101,7 @@
     <ClInclude Include="include\math\Math.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\ScriptHandler.h" />
+    <ClInclude Include="include\ScriptHandlerInternal.h" />
     <ClInclude Include="include\System.h" />
     <ClInclude Include="include\math\Vec2.h" />
   </ItemGroup>

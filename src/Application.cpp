@@ -7,8 +7,8 @@ Application::Application(Vec2i screenSize, std::string title) : System(screenSiz
 	entityHandler = new EntityHandler();
 	entityHandler->Add(new Player(assetHandler->GetTexture("tiles/boxAlt.png"), 35, Vec2f(300, 100), Vec2f(100, 0), Vec2f(0, 300)));
 
-	ScriptHandler::Init("assets/scripts/", entityHandler, assetHandler);
-	ScriptHandler::AddFile("test.lua");
+	scriptHandler = new ScriptHandler("assets/scripts/", entityHandler, assetHandler);
+	scriptHandler->AddFile("test.lua");
 }
 
 
@@ -16,7 +16,7 @@ Application::~Application()
 {
 	delete assetHandler;
 	delete entityHandler;
-	ScriptHandler::Close();
+	delete scriptHandler;
 }
 
 void Application::HandleEvent(SDL_Event& event)
@@ -25,14 +25,14 @@ void Application::HandleEvent(SDL_Event& event)
 	{
 	case SDL_MOUSEBUTTONUP:
 	case SDL_MOUSEBUTTONDOWN:
-		ScriptHandler::TriggerEvent(event.button);
+		scriptHandler->TriggerEvent(event.button);
 		break;
 	case SDL_MOUSEMOTION:
-		ScriptHandler::TriggerEvent(event.motion);
+		scriptHandler->TriggerEvent(event.motion);
 		break;
 	case SDL_KEYDOWN:
 	case SDL_KEYUP:
-		ScriptHandler::TriggerEvent(event.key);
+		scriptHandler->TriggerEvent(event.key);
 		break;
 	default:
 		break;
