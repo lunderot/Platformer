@@ -30,5 +30,7 @@ public:
 	Vec2f GetPosition() const;
 	Vec2f GetVelocity() const;
 	Vec2f GetAcceleration() const;
+
+	float GetRadius() const;
 };
 

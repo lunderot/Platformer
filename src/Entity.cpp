@@ -61,3 +61,8 @@ Vec2f Entity::GetAcceleration() const
 {
 	return acceleration;
 }
+
+float Entity::GetRadius() const
+{
+	return radius;
+}

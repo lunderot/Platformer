@@ -16,5 +16,7 @@ public:
 	void Render(SDL_Renderer* renderer);
 
 	void Add(Entity* entity);
+
+	Entity* GetEntity(int id);
 };
 

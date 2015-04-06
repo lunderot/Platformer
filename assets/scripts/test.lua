@@ -28,12 +28,32 @@ function keyboardEventHandler(key, state, repeating)
 	print("    name: " .. GetKeyNameFromCode(key))
 	print()
 end
-addEventHandler("keyboardEvent", keyboardEventHandler)
+--addEventHandler("keyboardEvent", keyboardEventHandler)
 
-addEventHandler("keyboardEvent",
-	function(key, state, repeating)
-		if state == 1 and key == GetKeyCodeFromName("A") and not repeating then
+function playerInput(key, state, repeating)
+	if state == 1 then
+		local xvel = 0
+		local yvel = 0
+
+		if key == GetKeyCodeFromName("A") then
 			print("Pressed A")
+			xvel = -100
+		elseif key == GetKeyCodeFromName("D") then
+			print("Pressed D")
+			xvel = 100
 		end
+		
+
+		if not repeating then
+			if key == GetKeyCodeFromName("W") then
+				yvel = -100
+			end
+			
+		end
+
+		local cxvel, cyvel = GetEntityVelocity(0)
+		SetEntityVelocity(0, cxvel+xvel, cyvel+yvel)
 	end
-)
+end
+
+addEventHandler("keyboardEvent", playerInput)

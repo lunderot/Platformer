@@ -50,7 +50,7 @@ void EntityHandler::Update(float deltaTime)
 				Vec2f incidentVec = (*i)->GetVelocity();
 				Vec2f out = incidentVec - lineNormal * (2.0f * incidentVec.Dot(lineNormal));
 
-				(*i)->SetVelocity(out);
+				(*i)->SetVelocity(out*0.9f);
 			}
 		}
 	}
@@ -73,4 +73,9 @@ void EntityHandler::Render(SDL_Renderer* renderer)
 void EntityHandler::Add(Entity* entity)
 {
 	entities.push_back(entity);
+}
+
+Entity* EntityHandler::GetEntity(int id)
+{
+	return entities.at(id);
 }

@@ -14,9 +14,25 @@ ScriptHandler::ScriptHandler(std::string scriptPath, EntityHandler* entityHandle
 	//Push Lua functions on the stack
 	lua_pushcfunction(ls, ScriptHandlerInternal::GetKeyCodeFromName);
 	lua_setglobal(ls, "GetKeyCodeFromName");
-
 	lua_pushcfunction(ls, ScriptHandlerInternal::GetKeyNameFromCode);
 	lua_setglobal(ls, "GetKeyNameFromCode");
+
+	lua_pushcfunction(ls, ScriptHandlerInternal::GetEntityPosition);
+	lua_setglobal(ls, "GetEntityPosition");
+	lua_pushcfunction(ls, ScriptHandlerInternal::GetEntityVelocity);
+	lua_setglobal(ls, "GetEntityVelocity");
+	lua_pushcfunction(ls, ScriptHandlerInternal::GetEntityAcceleration);
+	lua_setglobal(ls, "GetEntityAcceleration");
+
+	lua_pushcfunction(ls, ScriptHandlerInternal::SetEntityPosition);
+	lua_setglobal(ls, "SetEntityPosition");
+	lua_pushcfunction(ls, ScriptHandlerInternal::SetEntityVelocity);
+	lua_setglobal(ls, "SetEntityVelocity");
+	lua_pushcfunction(ls, ScriptHandlerInternal::SetEntityAcceleration);
+	lua_setglobal(ls, "SetEntityAcceleration");
+	
+	lua_pushcfunction(ls, ScriptHandlerInternal::GetEntityRadius);
+	lua_setglobal(ls, "GetEntityRadius");
 }
 
 ScriptHandler::~ScriptHandler()
