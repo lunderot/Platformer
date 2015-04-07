@@ -12,27 +12,19 @@ ScriptHandler::ScriptHandler(std::string scriptPath, EntityHandler* entityHandle
 	AddFile("global.lua");
 
 	//Push Lua functions on the stack
-	lua_pushcfunction(ls, ScriptHandlerInternal::GetKeyCodeFromName);
-	lua_setglobal(ls, "GetKeyCodeFromName");
-	lua_pushcfunction(ls, ScriptHandlerInternal::GetKeyNameFromCode);
-	lua_setglobal(ls, "GetKeyNameFromCode");
+	AddFunction(ScriptHandlerInternal::GetKeyCodeFromName, "GetKeyCodeFromName");
 
-	lua_pushcfunction(ls, ScriptHandlerInternal::GetEntityPosition);
-	lua_setglobal(ls, "GetEntityPosition");
-	lua_pushcfunction(ls, ScriptHandlerInternal::GetEntityVelocity);
-	lua_setglobal(ls, "GetEntityVelocity");
-	lua_pushcfunction(ls, ScriptHandlerInternal::GetEntityAcceleration);
-	lua_setglobal(ls, "GetEntityAcceleration");
+	AddFunction(ScriptHandlerInternal::GetKeyNameFromCode, "GetKeyNameFromCode");
 
-	lua_pushcfunction(ls, ScriptHandlerInternal::SetEntityPosition);
-	lua_setglobal(ls, "SetEntityPosition");
-	lua_pushcfunction(ls, ScriptHandlerInternal::SetEntityVelocity);
-	lua_setglobal(ls, "SetEntityVelocity");
-	lua_pushcfunction(ls, ScriptHandlerInternal::SetEntityAcceleration);
-	lua_setglobal(ls, "SetEntityAcceleration");
-	
-	lua_pushcfunction(ls, ScriptHandlerInternal::GetEntityRadius);
-	lua_setglobal(ls, "GetEntityRadius");
+	AddFunction(ScriptHandlerInternal::GetEntityPosition, "GetEntityPosition");
+	AddFunction(ScriptHandlerInternal::GetEntityVelocity, "GetEntityVelocity");
+	AddFunction(ScriptHandlerInternal::GetEntityAcceleration, "GetEntityAcceleration");
+
+	AddFunction(ScriptHandlerInternal::SetEntityPosition, "SetEntityPosition");
+	AddFunction(ScriptHandlerInternal::SetEntityVelocity, "SetEntityVelocity");
+	AddFunction(ScriptHandlerInternal::SetEntityAcceleration, "SetEntityAcceleration");
+
+	AddFunction(ScriptHandlerInternal::GetEntityRadius, "GetEntityRadius");
 }
 
 ScriptHandler::~ScriptHandler()
@@ -53,6 +45,12 @@ void ScriptHandler::AddFile(std::string filename)
 
 	std::string filepath = ScriptHandlerInternal::scriptPath + filename;
 	luaL_dofile(ls, filepath.c_str());
+}
+
+void ScriptHandler::AddFunction(lua_CFunction function, std::string functionName)
+{
+	lua_pushcfunction(ls, function);
+	lua_setglobal(ls, functionName.c_str());
 }
 
 void ScriptHandler::TriggerEvent(std::string id, int eventData)

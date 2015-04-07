@@ -22,6 +22,7 @@ public:
 	~ScriptHandler();
 
 	void AddFile(std::string filename);
+	void AddFunction(lua_CFunction function, std::string functionName);
 
 	void TriggerEvent(std::string id, int eventData);
 	void TriggerEvent(SDL_MouseButtonEvent event);
