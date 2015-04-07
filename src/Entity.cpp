@@ -20,12 +20,13 @@ void Entity::Update(float deltaTime)
 
 }
 
-void Entity::Render(SDL_Renderer* renderer)
+void Entity::Render(SDL_Renderer* renderer, Entity* camera)
 {
+	Vec2f cameraPosition = camera->GetPosition();
 	SDL_Rect destination =
 	{
-		static_cast<int>(position.x - radius),
-		static_cast<int>(position.y - radius),
+		static_cast<int>((position.x - radius) - cameraPosition.x),
+		static_cast<int>((position.y - radius) - cameraPosition.y),
 		static_cast<int>(radius * 2),
 		static_cast<int>(radius * 2)
 	};

@@ -10,6 +10,7 @@ EntityHandler::EntityHandler()
 		float m = 20.0f * 0.0174532925f / 10.0f;
 		collisionLines.push_back(new LineSegment(offset + Vec2f(cos(i * m)*factor, sin(i * m)*factor), offset + Vec2f(cos((i + 1) * m)*factor, sin((i + 1) * m)*factor)));
 	}
+	cameraId = -1;
 }
 
 
@@ -31,7 +32,7 @@ void EntityHandler::Update(float deltaTime)
 	{
 		(*i)->Update(deltaTime);
 
-		if (!dynamic_cast<Tile*>((*i))) //Don't check physics for tiles
+		if (dynamic_cast<Player*>((*i))) //Don't check physics for tiles and camera
 		{
 			(*i)->velocity += (*i)->acceleration * deltaTime;
 			(*i)->position += (*i)->velocity * deltaTime;
@@ -63,19 +64,39 @@ void EntityHandler::Render(SDL_Renderer* renderer)
 {
 	for (std::vector<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 	{
-		(*i)->Render(renderer);
+		(*i)->Render(renderer, GetEntity(cameraId));
 	}
+	Vec2f cameraPosition = GetEntity(cameraId)->GetPosition();
 	for (std::vector<LineSegment*>::iterator j = collisionLines.begin(); j != collisionLines.end(); ++j)
 	{
 		SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
-		SDL_RenderDrawLine(renderer, (*j)->point[0].x, (*j)->point[0].y, (*j)->point[1].x, (*j)->point[1].y);
+		SDL_RenderDrawLine(renderer,
+			(*j)->point[0].x - cameraPosition.x,
+			(*j)->point[0].y - cameraPosition.y,
+			(*j)->point[1].x - cameraPosition.x,
+			(*j)->point[1].y - cameraPosition.y
+		);
 	}
-	
 }
 
-void EntityHandler::Add(Entity* entity)
+int EntityHandler::Add(Entity* entity)
 {
+	int returnValue = -1;
+	returnValue = entities.size();
 	entities.push_back(entity);
+
+	if (dynamic_cast<Camera*>(entity))
+	{
+		if (cameraId == -1)
+		{
+			cameraId = returnValue;
+		}
+		else
+		{
+			throw std::runtime_error("More than one camera added");
+		}
+	}
+	return returnValue;
 }
 
 Entity* EntityHandler::GetEntity(int id)

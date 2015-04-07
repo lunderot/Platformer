@@ -4,11 +4,14 @@
 
 #include "Entity.h"
 #include "Tile.h"
+#include "Camera.h"
+#include "Player.h"
 
 class EntityHandler
 {
 	std::vector<Entity*> entities;
 	std::vector<LineSegment*> collisionLines;
+	int cameraId;
 public:
 	EntityHandler();
 	~EntityHandler();
@@ -16,7 +19,7 @@ public:
 	void Update(float deltaTime);
 	void Render(SDL_Renderer* renderer);
 
-	void Add(Entity* entity);
+	int Add(Entity* entity);
 
 	Entity* GetEntity(int id);
 };

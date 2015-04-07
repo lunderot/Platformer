@@ -3,6 +3,7 @@
 #include <SDL.h>
 
 #include "math/Math.h"
+#include "Entity.h"
 
 class Entity
 {
@@ -19,7 +20,7 @@ public:
 	virtual ~Entity();
 
 	virtual void Update(float deltaTime);
-	virtual void Render(SDL_Renderer* renderer);
+	virtual void Render(SDL_Renderer* renderer, Entity* camera);
 
 	Circle GetBoundingCircle() const;
 
