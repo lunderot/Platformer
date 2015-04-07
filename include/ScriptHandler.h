@@ -24,7 +24,7 @@ public:
 	void AddFile(std::string filename);
 	void AddFunction(lua_CFunction function, std::string functionName);
 
-	void TriggerEvent(std::string id, int eventData);
+	void TriggerEvent(std::string id);
 	void TriggerEvent(SDL_MouseButtonEvent event);
 	void TriggerEvent(SDL_MouseMotionEvent event);
 	void TriggerEvent(SDL_KeyboardEvent event);

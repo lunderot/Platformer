@@ -50,6 +50,7 @@ void Application::HandleEvent(SDL_Event& event)
 void Application::Update(float deltaTime)
 {
 	entityHandler->Update(deltaTime);
+	scriptHandler->TriggerEvent("update");
 }
 
 void Application::Render()

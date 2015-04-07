@@ -55,14 +55,13 @@ void ScriptHandler::AddFunction(lua_CFunction function, std::string functionName
 	lua_setglobal(ls, functionName.c_str());
 }
 
-void ScriptHandler::TriggerEvent(std::string id, int eventData)
+void ScriptHandler::TriggerEvent(std::string id)
 {
 	ScriptHandlerInternal::SetState(ls, scriptPath, entityHandler, assetHandler);
 
 	lua_getglobal(ls, "triggerEvent");
 	lua_pushstring(ls, id.c_str());
-	lua_pushnumber(ls, eventData);
-	if (lua_pcall(ls, 2, 0, 0) != 0)
+	if (lua_pcall(ls, 1, 0, 0) != 0)
 	{
 		throw std::runtime_error("Error running function 'triggerEvent': " + std::string(lua_tostring(ls, -1)));
 	}

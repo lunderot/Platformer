@@ -57,9 +57,8 @@ function playerInput(key, state, repeating)
 end
 --addEventHandler("keyboardEvent", playerInput)
 
-function setCameraTest(key, state, repeating)
-	if key == GetKeyCodeFromName("A") then
-		SetEntityPosition(GetCameraId(), 400, 400)
-	end
+function cameraUpdate()
+	local x,y = GetEntityPosition(0)
+	SetEntityPosition(GetCameraId(), x, y)
 end
-addEventHandler("keyboardEvent", setCameraTest)
+addEventHandler("update", cameraUpdate)
