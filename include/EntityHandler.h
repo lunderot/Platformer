@@ -22,5 +22,6 @@ public:
 	int Add(Entity* entity);
 
 	Entity* GetEntity(int id);
+	int GetCameraId();
 };
 

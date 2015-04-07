@@ -103,3 +103,8 @@ Entity* EntityHandler::GetEntity(int id)
 {
 	return entities.at(id);
 }
+
+int EntityHandler::GetCameraId()
+{
+	return cameraId;
+}

@@ -16,6 +16,8 @@ ScriptHandler::ScriptHandler(std::string scriptPath, EntityHandler* entityHandle
 
 	AddFunction(ScriptHandlerInternal::GetKeyNameFromCode, "GetKeyNameFromCode");
 
+	AddFunction(ScriptHandlerInternal::GetCameraId, "GetCameraId");
+
 	AddFunction(ScriptHandlerInternal::GetEntityPosition, "GetEntityPosition");
 	AddFunction(ScriptHandlerInternal::GetEntityVelocity, "GetEntityVelocity");
 	AddFunction(ScriptHandlerInternal::GetEntityAcceleration, "GetEntityAcceleration");

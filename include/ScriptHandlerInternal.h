@@ -38,6 +38,13 @@ namespace ScriptHandlerInternal
 		return 1;
 	}
 
+	//Entity handler functions
+	static int GetCameraId(lua_State* ls) //id = GetCameraId()
+	{
+		lua_pushnumber(ls, entityHandler->GetCameraId());
+		return 1;
+	}
+
 	//Entity functions
 	static int GetEntityPosition(lua_State* ls) //x,y = GetEntityPosition(id)
 	{
