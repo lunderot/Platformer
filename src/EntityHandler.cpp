@@ -31,26 +31,29 @@ void EntityHandler::Update(float deltaTime)
 	{
 		(*i)->Update(deltaTime);
 
-		(*i)->velocity += (*i)->acceleration * deltaTime;
-		(*i)->position += (*i)->velocity * deltaTime;
-
-		//Check and resolve collision with lines
-		for (std::vector<LineSegment*>::iterator j = collisionLines.begin(); j != collisionLines.end(); ++j)
+		if (!dynamic_cast<Tile*>((*i))) //Don't check physics for tiles
 		{
-			//Calculate offset and move entity
-			Vec2f offset = LineSegmentCircleCollision(*(*j), (*i)->GetBoundingCircle());
-			(*i)->position += offset;
+			(*i)->velocity += (*i)->acceleration * deltaTime;
+			(*i)->position += (*i)->velocity * deltaTime;
 
-			if (offset.Length() > 0.0f)
+			//Check and resolve collision with lines
+			for (std::vector<LineSegment*>::iterator j = collisionLines.begin(); j != collisionLines.end(); ++j)
 			{
-				//Calculate line normal
-				Vec2f lineNormal = offset.Normalized();
+				//Calculate offset and move entity
+				Vec2f offset = LineSegmentCircleCollision(*(*j), (*i)->GetBoundingCircle());
+				(*i)->position += offset;
 
-				//Calculate reflection vector
-				Vec2f incidentVec = (*i)->GetVelocity();
-				Vec2f out = incidentVec - lineNormal * (2.0f * incidentVec.Dot(lineNormal));
+				if (offset.Length() > 0.0f)
+				{
+					//Calculate line normal
+					Vec2f lineNormal = offset.Normalized();
 
-				(*i)->SetVelocity(out*0.9f);
+					//Calculate reflection vector
+					Vec2f incidentVec = (*i)->GetVelocity();
+					Vec2f out = incidentVec - lineNormal * (2.0f * incidentVec.Dot(lineNormal));
+
+					(*i)->SetVelocity(out*0.9f);
+				}
 			}
 		}
 	}

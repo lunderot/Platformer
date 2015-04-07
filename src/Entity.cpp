@@ -15,6 +15,11 @@ Entity::~Entity()
 {
 }
 
+void Entity::Update(float deltaTime)
+{
+
+}
+
 void Entity::Render(SDL_Renderer* renderer)
 {
 	SDL_Rect destination =

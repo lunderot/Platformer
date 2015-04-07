@@ -3,10 +3,13 @@
 #include <SDL.h>
 
 #include "System.h"
+
 #include "AssetHandler.h"
-#include "Player.h"
 #include "EntityHandler.h"
 #include "ScriptHandler.h"
+
+#include "Player.h"
+#include "Tile.h"
 
 class Application: public System
 {

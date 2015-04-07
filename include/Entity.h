@@ -18,7 +18,7 @@ public:
 	Entity(SDL_Texture* texture, float radius, Vec2f position = Vec2f(), Vec2f velocity = Vec2f(), Vec2f acceleration = Vec2f());
 	virtual ~Entity();
 
-	virtual void Update(float deltaTime) = 0;
+	virtual void Update(float deltaTime);
 	virtual void Render(SDL_Renderer* renderer);
 
 	Circle GetBoundingCircle() const;

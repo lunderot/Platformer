@@ -84,6 +84,7 @@
     <ClCompile Include="src\ScriptHandlerInternal.cpp" />
     <ClCompile Include="src\System.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Application.h" />
@@ -104,6 +105,7 @@
     <ClInclude Include="include\ScriptHandlerInternal.h" />
     <ClInclude Include="include\System.h" />
     <ClInclude Include="include\math\Vec2.h" />
+    <ClInclude Include="include\Tile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
