@@ -66,15 +66,17 @@ void EntityHandler::Render(SDL_Renderer* renderer)
 	{
 		(*i)->Render(renderer, GetEntity(cameraId));
 	}
+	Camera* cam = dynamic_cast<Camera*>(GetEntity(cameraId));
 	Vec2f cameraPosition = GetEntity(cameraId)->GetPosition();
+	Vec2f cameraSize = cam->GetSize();
 	for (std::vector<LineSegment*>::iterator j = collisionLines.begin(); j != collisionLines.end(); ++j)
 	{
 		SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
 		SDL_RenderDrawLine(renderer,
-			(*j)->point[0].x - cameraPosition.x,
-			(*j)->point[0].y - cameraPosition.y,
-			(*j)->point[1].x - cameraPosition.x,
-			(*j)->point[1].y - cameraPosition.y
+			(*j)->point[0].x - cameraPosition.x + cameraSize.x/2,
+			(*j)->point[0].y - cameraPosition.y + cameraSize.y/2,
+			(*j)->point[1].x - cameraPosition.x + cameraSize.x/2,
+			(*j)->point[1].y - cameraPosition.y + cameraSize.y/2
 		);
 	}
 }

@@ -1,5 +1,6 @@
 #include "Entity.h"
 
+#include "Camera.h"
 
 Entity::Entity(SDL_Texture* texture, float radius, Vec2f position, Vec2f velocity, Vec2f acceleration)
 {
@@ -23,10 +24,11 @@ void Entity::Update(float deltaTime)
 void Entity::Render(SDL_Renderer* renderer, Entity* camera)
 {
 	Vec2f cameraPosition = camera->GetPosition();
+	Vec2f cameraSize = dynamic_cast<Camera*>(camera)->GetSize();
 	SDL_Rect destination =
 	{
-		static_cast<int>((position.x - radius) - cameraPosition.x),
-		static_cast<int>((position.y - radius) - cameraPosition.y),
+		static_cast<int>((position.x - radius) - cameraPosition.x + cameraSize.x/2),
+		static_cast<int>((position.y - radius) - cameraPosition.y + cameraSize.y/2),
 		static_cast<int>(radius * 2),
 		static_cast<int>(radius * 2)
 	};
