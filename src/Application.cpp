@@ -13,7 +13,7 @@ Application::Application(Vec2i screenSize, std::string title) : System(screenSiz
 		entityHandler->Add(new Tile(assetHandler->GetTexture("tiles/grass.png"), 70.0f, Vec2f(i * 70, 700)));
 	}
 
-	entityHandler->Add(new Camera(Vec2f(screenSize.x, screenSize.y), Vec2f(100, 100)));
+	entityHandler->Add(new Camera(Vec2f(screenSize.x, screenSize.y), Vec2f(0, 0)));
 
 	scriptHandler = new ScriptHandler("assets/scripts/", entityHandler, assetHandler);
 	scriptHandler->AddFile("test.lua");

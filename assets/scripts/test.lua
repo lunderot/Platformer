@@ -62,3 +62,14 @@ function cameraUpdate()
 	SetEntityPosition(GetCameraId(), x, y)
 end
 addEventHandler("update", cameraUpdate)
+
+function entityTest(button, clicks, state, x, y)
+	if state == 1 then
+		local camx, camy = GetEntityPosition(GetCameraId())
+		local camw, camh = GetCameraSize();
+		local id = AddEntity(0, "tiles/box.png", 30)
+		SetEntityPosition(id, x+camx-camw/2, y+camy-camh/2)
+		SetEntityAcceleration(id, 0, 100)
+	end
+end
+addEventHandler("mouseButtonEvent", entityTest)

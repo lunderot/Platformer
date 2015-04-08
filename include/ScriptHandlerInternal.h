@@ -44,6 +44,24 @@ namespace ScriptHandlerInternal
 		lua_pushnumber(ls, entityHandler->GetCameraId());
 		return 1;
 	}
+	static int GetCameraSize(lua_State* ls) //w,h = GetCameraSize()
+	{
+		Camera* camera = dynamic_cast<Camera*>(entityHandler->GetEntity(entityHandler->GetCameraId()));
+		Vec2f size = camera->GetSize();
+		lua_pushnumber(ls, size.x);
+		lua_pushnumber(ls, size.y);
+		return 2;
+	}
+
+	static int AddEntity(lua_State* ls) //id = AddEntity(type, textureFilename, radius)
+	{
+		int type = luaL_checknumber(ls, 1);
+		std::string textureFilename(luaL_checkstring(ls, 2));
+		float radius = luaL_checknumber(ls, 3);
+		int id = entityHandler->Add(static_cast<EntityType>(type), textureFilename, radius, assetHandler);
+		lua_pushnumber(ls, id);
+		return 1;
+	}
 
 	//Entity functions
 	static int GetEntityPosition(lua_State* ls) //x,y = GetEntityPosition(id)

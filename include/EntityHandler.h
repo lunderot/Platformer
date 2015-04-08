@@ -7,6 +7,8 @@
 #include "Camera.h"
 #include "Player.h"
 
+#include "AssetHandler.h"
+
 class EntityHandler
 {
 	std::vector<Entity*> entities;
@@ -20,6 +22,7 @@ public:
 	void Render(SDL_Renderer* renderer);
 
 	int Add(Entity* entity);
+	int Add(EntityType type, std::string textureFilename, float radius, AssetHandler* assetHandler);
 
 	Entity* GetEntity(int id);
 	int GetCameraId();

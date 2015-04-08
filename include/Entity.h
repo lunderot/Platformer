@@ -3,7 +3,13 @@
 #include <SDL.h>
 
 #include "math/Math.h"
-#include "Entity.h"
+
+enum EntityType
+{
+	PLAYER,
+	TILE,
+	CAMERA
+};
 
 class Entity
 {

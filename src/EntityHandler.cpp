@@ -101,6 +101,27 @@ int EntityHandler::Add(Entity* entity)
 	return returnValue;
 }
 
+int EntityHandler::Add(EntityType type, std::string textureFilename, float radius, AssetHandler* assetHandler)
+{
+	Entity* entity = nullptr;
+	switch (type)
+	{
+	case PLAYER:
+		entity = new Player(assetHandler->GetTexture(textureFilename), radius);
+		break;
+	case TILE:
+		entity = new Tile(assetHandler->GetTexture(textureFilename), radius);
+		break;
+	default:
+		break;
+	}
+	if (!entity)
+	{
+		throw std::runtime_error("Invalid entity type");
+	}
+	return Add(entity);
+}
+
 Entity* EntityHandler::GetEntity(int id)
 {
 	return entities.at(id);
