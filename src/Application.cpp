@@ -10,10 +10,10 @@ Application::Application(Vec2i screenSize, std::string title) : System(screenSiz
 
 	for (int i = 0; i < 10; i++)
 	{
-		entityHandler->Add(new Tile(assetHandler->GetTexture("tiles/grass.png"), 70.0f, Vec2f(i * 70, 700)));
+		entityHandler->Add(new Tile(assetHandler->GetTexture("tiles/grass.png"), 70.0f, Vec2f(i * 70.0f, 700.0f)));
 	}
 
-	entityHandler->Add(new Camera(Vec2f(screenSize.x, screenSize.y), Vec2f(0, 0)));
+	entityHandler->Add(new Camera(Vec2f(static_cast<float>(screenSize.x), static_cast<float>(screenSize.y)), Vec2f(0.0f, 0.0f)));
 
 	scriptHandler = new ScriptHandler("assets/scripts/", entityHandler, assetHandler);
 	scriptHandler->AddFile("test.lua");

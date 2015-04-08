@@ -66,7 +66,8 @@ void ScriptHandler::TriggerEvent(std::string id)
 	lua_pushstring(ls, id.c_str());
 	if (lua_pcall(ls, 1, 0, 0) != 0)
 	{
-		throw std::runtime_error("Error running function 'triggerEvent': " + std::string(lua_tostring(ls, -1)));
+		std::cerr << std::string(lua_tostring(ls, -1)) << std::endl;
+		lua_pop(ls, 1);
 	}
 }
 void ScriptHandler::TriggerEvent(SDL_MouseButtonEvent event)
@@ -82,7 +83,8 @@ void ScriptHandler::TriggerEvent(SDL_MouseButtonEvent event)
 	lua_pushnumber(ls, static_cast<int>(event.y));
 	if (lua_pcall(ls, 6, 0, 0) != 0)
 	{
-		throw std::runtime_error("Error running function 'triggerEvent': " + std::string(lua_tostring(ls, -1)));
+		std::cerr << std::string(lua_tostring(ls, -1)) << std::endl;
+		lua_pop(ls, 1);
 	}
 }
 void ScriptHandler::TriggerEvent(SDL_MouseMotionEvent event)
@@ -98,7 +100,8 @@ void ScriptHandler::TriggerEvent(SDL_MouseMotionEvent event)
 	lua_pushnumber(ls, static_cast<int>(event.yrel));
 	if (lua_pcall(ls, 6, 0, 0) != 0)
 	{
-		throw std::runtime_error("Error running function 'triggerEvent': " + std::string(lua_tostring(ls, -1)));
+		std::cerr << std::string(lua_tostring(ls, -1)) << std::endl;
+		lua_pop(ls, 1);
 	}
 }
 void ScriptHandler::TriggerEvent(SDL_KeyboardEvent event)
@@ -109,9 +112,10 @@ void ScriptHandler::TriggerEvent(SDL_KeyboardEvent event)
 	lua_pushstring(ls, "keyboardEvent");
 	lua_pushnumber(ls, static_cast<int>(event.keysym.sym));
 	lua_pushnumber(ls, static_cast<int>(event.state));
-	lua_pushboolean(ls, static_cast<bool>(event.repeat));
+	lua_pushboolean(ls, static_cast<bool>(event.repeat != 0));
 	if (lua_pcall(ls, 4, 0, 0) != 0)
 	{
-		throw std::runtime_error("Error running function 'triggerEvent': " + std::string(lua_tostring(ls, -1)));
+		std::cerr << std::string(lua_tostring(ls, -1)) << std::endl;
+		lua_pop(ls, 1);
 	}
 }
