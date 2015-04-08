@@ -62,9 +62,12 @@ void ScriptHandler::TriggerEvent(std::string id)
 {
 	ScriptHandlerInternal::SetState(ls, scriptPath, entityHandler, assetHandler);
 
+	lua_getglobal(ls, "errorHandler");
+	int errorHandlerIndex = lua_gettop(ls);
+
 	lua_getglobal(ls, "triggerEvent");
 	lua_pushstring(ls, id.c_str());
-	if (lua_pcall(ls, 1, 0, 0) != 0)
+	if (lua_pcall(ls, 1, 0, errorHandlerIndex) != 0)
 	{
 		std::cerr << std::string(lua_tostring(ls, -1)) << std::endl;
 		lua_pop(ls, 1);
@@ -73,6 +76,9 @@ void ScriptHandler::TriggerEvent(std::string id)
 void ScriptHandler::TriggerEvent(SDL_MouseButtonEvent event)
 {
 	ScriptHandlerInternal::SetState(ls, scriptPath, entityHandler, assetHandler);
+	
+	lua_getglobal(ls, "errorHandler");
+	int errorHandlerIndex = lua_gettop(ls);
 
 	lua_getglobal(ls, "triggerEvent");
 	lua_pushstring(ls, "mouseButtonEvent");
@@ -81,7 +87,7 @@ void ScriptHandler::TriggerEvent(SDL_MouseButtonEvent event)
 	lua_pushnumber(ls, static_cast<int>(event.state));
 	lua_pushnumber(ls, static_cast<int>(event.x));
 	lua_pushnumber(ls, static_cast<int>(event.y));
-	if (lua_pcall(ls, 6, 0, 0) != 0)
+	if (lua_pcall(ls, 6, 0, errorHandlerIndex) != 0)
 	{
 		std::cerr << std::string(lua_tostring(ls, -1)) << std::endl;
 		lua_pop(ls, 1);
@@ -91,6 +97,9 @@ void ScriptHandler::TriggerEvent(SDL_MouseMotionEvent event)
 {
 	ScriptHandlerInternal::SetState(ls, scriptPath, entityHandler, assetHandler);
 
+	lua_getglobal(ls, "errorHandler");
+	int errorHandlerIndex = lua_gettop(ls);
+
 	lua_getglobal(ls, "triggerEvent");
 	lua_pushstring(ls, "mouseMotionEvent");
 	lua_pushnumber(ls, static_cast<int>(event.state));
@@ -98,7 +107,7 @@ void ScriptHandler::TriggerEvent(SDL_MouseMotionEvent event)
 	lua_pushnumber(ls, static_cast<int>(event.y));
 	lua_pushnumber(ls, static_cast<int>(event.xrel));
 	lua_pushnumber(ls, static_cast<int>(event.yrel));
-	if (lua_pcall(ls, 6, 0, 0) != 0)
+	if (lua_pcall(ls, 6, 0, errorHandlerIndex) != 0)
 	{
 		std::cerr << std::string(lua_tostring(ls, -1)) << std::endl;
 		lua_pop(ls, 1);
@@ -108,12 +117,15 @@ void ScriptHandler::TriggerEvent(SDL_KeyboardEvent event)
 {
 	ScriptHandlerInternal::SetState(ls, scriptPath, entityHandler, assetHandler);
 
+	lua_getglobal(ls, "errorHandler");
+	int errorHandlerIndex = lua_gettop(ls);
+
 	lua_getglobal(ls, "triggerEvent");
 	lua_pushstring(ls, "keyboardEvent");
 	lua_pushnumber(ls, static_cast<int>(event.keysym.sym));
 	lua_pushnumber(ls, static_cast<int>(event.state));
 	lua_pushboolean(ls, static_cast<bool>(event.repeat != 0));
-	if (lua_pcall(ls, 4, 0, 0) != 0)
+	if (lua_pcall(ls, 4, 0, errorHandlerIndex) != 0)
 	{
 		std::cerr << std::string(lua_tostring(ls, -1)) << std::endl;
 		lua_pop(ls, 1);

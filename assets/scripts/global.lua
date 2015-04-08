@@ -15,3 +15,7 @@ function triggerEvent(id, ...)
 		end
 	end
 end
+
+function errorHandler(message)
+	return message .. "\n" .. debug.traceback()
+end
