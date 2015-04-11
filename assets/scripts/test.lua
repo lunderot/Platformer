@@ -57,7 +57,7 @@ function playerInput(key, state, repeating)
 end
 --addEventHandler("keyboardEvent", playerInput)
 
-function cameraUpdate()
+function cameraUpdate(deltaTime)
 	local x,y = GetEntityPosition(0)
 	SetEntityPosition(GetCameraId(), x, y)
 end

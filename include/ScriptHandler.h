@@ -25,6 +25,7 @@ public:
 	void AddFunction(lua_CFunction function, std::string functionName);
 
 	void TriggerEvent(std::string id);
+	void ScriptHandler::TriggerEvent(std::string id, float deltaTime);
 	void TriggerEvent(SDL_MouseButtonEvent event);
 	void TriggerEvent(SDL_MouseMotionEvent event);
 	void TriggerEvent(SDL_KeyboardEvent event);

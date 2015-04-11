@@ -73,6 +73,23 @@ void ScriptHandler::TriggerEvent(std::string id)
 		lua_pop(ls, 1);
 	}
 }
+void ScriptHandler::TriggerEvent(std::string id, float deltaTime)
+{
+	ScriptHandlerInternal::SetState(ls, scriptPath, entityHandler, assetHandler);
+
+	lua_getglobal(ls, "errorHandler");
+	int errorHandlerIndex = lua_gettop(ls);
+
+	lua_getglobal(ls, "triggerEvent");
+	lua_pushstring(ls, id.c_str());
+	lua_pushnumber(ls, deltaTime);
+	if (lua_pcall(ls, 2, 0, errorHandlerIndex) != 0)
+	{
+		std::cerr << std::string(lua_tostring(ls, -1)) << std::endl;
+		lua_pop(ls, 1);
+	}
+}
+
 void ScriptHandler::TriggerEvent(SDL_MouseButtonEvent event)
 {
 	ScriptHandlerInternal::SetState(ls, scriptPath, entityHandler, assetHandler);
