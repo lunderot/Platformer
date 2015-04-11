@@ -1,0 +1,19 @@
+i 70
+
+t tiles/grassLeft.png 0 0
+t tiles/grassMid.png 1 0
+t tiles/grassMid.png 2 0
+t tiles/grassMid.png 3 0
+t tiles/grassMid.png 4 0
+t tiles/grassRight.png 5 0
+
+t tiles/grassCenter.png 0 1
+t tiles/grassCenter.png 1 1
+t tiles/grassCenter.png 2 1
+t tiles/grassCenter.png 3 1
+t tiles/grassCenter.png 4 1
+t tiles/grassCenter.png 5 1
+
+t tiles/boxItem.png 2 -2
+
+l -35 -35 385 -35

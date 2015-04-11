@@ -3,13 +3,6 @@
 
 EntityHandler::EntityHandler()
 {
-	Vec2f offset(500, 300);
-	float factor = 400.0f;
-	for (int i = 0; i < 18*10; i++)
-	{
-		float m = 20.0f * 0.0174532925f / 10.0f;
-		collisionLines.push_back(new LineSegment(offset + Vec2f(cos(i * m)*factor, sin(i * m)*factor), offset + Vec2f(cos((i + 1) * m)*factor, sin((i + 1) * m)*factor)));
-	}
 	cameraId = -1;
 }
 
@@ -120,6 +113,11 @@ int EntityHandler::Add(EntityType type, std::string textureFilename, float radiu
 		throw std::runtime_error("Invalid entity type");
 	}
 	return Add(entity);
+}
+
+void EntityHandler::AddCollisionLine(LineSegment* line)
+{
+	collisionLines.push_back(line);
 }
 
 Entity* EntityHandler::GetEntity(int id)

@@ -76,6 +76,7 @@
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\EntityHandler.cpp" />
+    <ClCompile Include="src\MapHandler.cpp" />
     <ClCompile Include="src\math\Box.cpp" />
     <ClCompile Include="src\math\Circle.cpp" />
     <ClCompile Include="src\math\LineSegment.cpp" />
@@ -98,6 +99,7 @@
     <ClInclude Include="include\lua\lua.hpp" />
     <ClInclude Include="include\lua\luaconf.h" />
     <ClInclude Include="include\lua\lualib.h" />
+    <ClInclude Include="include\MapHandler.h" />
     <ClInclude Include="include\math\Box.h" />
     <ClInclude Include="include\math\Circle.h" />
     <ClInclude Include="include\math\LineSegment.h" />

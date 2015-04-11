@@ -23,6 +23,7 @@ public:
 
 	int Add(Entity* entity);
 	int Add(EntityType type, std::string textureFilename, float radius, AssetHandler* assetHandler);
+	void AddCollisionLine(LineSegment* line);
 
 	Entity* GetEntity(int id);
 	int GetCameraId();

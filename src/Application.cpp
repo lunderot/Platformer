@@ -3,20 +3,15 @@
 Application::Application(Vec2i screenSize, std::string title) : System(screenSize, title)
 {
 	assetHandler = new AssetHandler(GetRenderer(), "assets/textures/");
-
 	entityHandler = new EntityHandler();
 
 	entityHandler->Add(new Player(assetHandler->GetTexture("tiles/boxAlt.png"), 35, Vec2f(300, 100), Vec2f(100, 0), Vec2f(0, 300)));
-
-	for (int i = 0; i < 10; i++)
-	{
-		entityHandler->Add(new Tile(assetHandler->GetTexture("tiles/grass.png"), 70.0f, Vec2f(i * 70.0f, 700.0f)));
-	}
-
 	entityHandler->Add(new Camera(Vec2f(static_cast<float>(screenSize.x), static_cast<float>(screenSize.y)), Vec2f(0.0f, 0.0f)));
 
 	scriptHandler = new ScriptHandler("assets/scripts/", entityHandler, assetHandler);
 	scriptHandler->AddFile("test.lua");
+
+	mapHandler = new MapHandler("assets/maps/testmap.map", entityHandler, assetHandler);
 }
 
 
@@ -25,6 +20,7 @@ Application::~Application()
 	delete assetHandler;
 	delete entityHandler;
 	delete scriptHandler;
+	delete mapHandler;
 }
 
 void Application::HandleEvent(SDL_Event& event)
