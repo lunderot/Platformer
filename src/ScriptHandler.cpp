@@ -18,6 +18,7 @@ ScriptHandler::ScriptHandler(std::string scriptPath, EntityHandler* entityHandle
 
 	AddFunction(ScriptHandlerInternal::GetCameraId, "GetCameraId");
 	AddFunction(ScriptHandlerInternal::GetCameraSize, "GetCameraSize");
+	AddFunction(ScriptHandlerInternal::GetWorldPositionFromScreenPosition, "GetWorldPositionFromScreenPosition");
 	AddFunction(ScriptHandlerInternal::AddEntity, "AddEntity");
 
 

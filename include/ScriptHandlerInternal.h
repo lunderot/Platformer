@@ -52,6 +52,17 @@ namespace ScriptHandlerInternal
 		lua_pushnumber(ls, size.y);
 		return 2;
 	}
+	static int GetWorldPositionFromScreenPosition(lua_State* ls) //x,y = GetWorldPositionFromScreenPosition(x, y)
+	{
+		float x = static_cast<float>(luaL_checknumber(ls, 1));
+		float y = static_cast<float>(luaL_checknumber(ls, 2));
+		Camera* camera = dynamic_cast<Camera*>(entityHandler->GetEntity(entityHandler->GetCameraId()));
+		Vec2f camSize = camera->GetSize();
+		Vec2f camPosition = camera->GetPosition();
+		lua_pushnumber(ls, x + camPosition.x - camSize.x / 2);
+		lua_pushnumber(ls, y + camPosition.y - camSize.y / 2);
+		return 2;
+	}
 
 	static int AddEntity(lua_State* ls) //id = AddEntity(type, textureFilename, radius)
 	{

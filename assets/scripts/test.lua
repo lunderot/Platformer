@@ -68,7 +68,7 @@ function entityTest(button, clicks, state, x, y)
 		local camx, camy = GetEntityPosition(GetCameraId())
 		local camw, camh = GetCameraSize();
 		local id = AddEntity(0, "tiles/box.png", 30)
-		SetEntityPosition(id, x+camx-camw/2, y+camy-camh/2)
+		SetEntityPosition(id, GetWorldPositionFromScreenPosition(x, y))
 		SetEntityAcceleration(id, 0, 100)
 	end
 end
