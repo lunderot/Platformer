@@ -14,11 +14,10 @@ class ScriptHandler
 {
 private:
 	lua_State* ls;
-	std::string scriptPath;
 	EntityHandler* entityHandler;
 	AssetHandler* assetHandler;
 public:
-	ScriptHandler(std::string scriptPath, EntityHandler* entityHandler, AssetHandler* assetHandler);
+	ScriptHandler(EntityHandler* entityHandler, AssetHandler* assetHandler);
 	~ScriptHandler();
 
 	void AddFile(std::string filename);
@@ -30,7 +29,7 @@ public:
 	void TriggerEvent(SDL_MouseMotionEvent event);
 	void TriggerEvent(SDL_KeyboardEvent event);
 
-	friend void ScriptHandlerInternal::SetState(lua_State* ls, std::string scriptPath, EntityHandler* entityHandler, AssetHandler* assetHandler);
+	friend void ScriptHandlerInternal::SetState(lua_State* ls, EntityHandler* entityHandler, AssetHandler* assetHandler);
 };
 
 

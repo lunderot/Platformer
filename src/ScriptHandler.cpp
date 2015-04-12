@@ -1,15 +1,14 @@
 #include "ScriptHandler.h"
 
-ScriptHandler::ScriptHandler(std::string scriptPath, EntityHandler* entityHandler, AssetHandler* assetHandler)
+ScriptHandler::ScriptHandler(EntityHandler* entityHandler, AssetHandler* assetHandler)
 {
 	this->ls = luaL_newstate();
 	luaL_openlibs(ls);
 
-	this->scriptPath = scriptPath;
 	this->entityHandler = entityHandler;
 	this->assetHandler = assetHandler;
 
-	AddFile("global.lua");
+	AddFile("assets/scripts/global.lua");
 
 	//Push Lua functions on the stack
 	AddFunction(ScriptHandlerInternal::GetKeyCodeFromName, "GetKeyCodeFromName");
@@ -38,19 +37,17 @@ ScriptHandler::~ScriptHandler()
 	lua_close(ls);
 
 	ls = nullptr;
-	scriptPath = "";
 	entityHandler = nullptr;
 	assetHandler = nullptr;
 
-	ScriptHandlerInternal::SetState(ls, scriptPath, entityHandler, assetHandler);
+	ScriptHandlerInternal::SetState(ls, entityHandler, assetHandler);
 }
 
 void ScriptHandler::AddFile(std::string filename)
 {
-	ScriptHandlerInternal::SetState(ls, scriptPath, entityHandler, assetHandler);
+	ScriptHandlerInternal::SetState(ls, entityHandler, assetHandler);
 
-	std::string filepath = ScriptHandlerInternal::scriptPath + filename;
-	luaL_dofile(ls, filepath.c_str());
+	luaL_dofile(ls, filename.c_str());
 }
 
 void ScriptHandler::AddFunction(lua_CFunction function, std::string functionName)
@@ -61,7 +58,7 @@ void ScriptHandler::AddFunction(lua_CFunction function, std::string functionName
 
 void ScriptHandler::TriggerEvent(std::string id)
 {
-	ScriptHandlerInternal::SetState(ls, scriptPath, entityHandler, assetHandler);
+	ScriptHandlerInternal::SetState(ls, entityHandler, assetHandler);
 
 	lua_getglobal(ls, "errorHandler");
 	int errorHandlerIndex = lua_gettop(ls);
@@ -76,7 +73,7 @@ void ScriptHandler::TriggerEvent(std::string id)
 }
 void ScriptHandler::TriggerEvent(std::string id, float deltaTime)
 {
-	ScriptHandlerInternal::SetState(ls, scriptPath, entityHandler, assetHandler);
+	ScriptHandlerInternal::SetState(ls, entityHandler, assetHandler);
 
 	lua_getglobal(ls, "errorHandler");
 	int errorHandlerIndex = lua_gettop(ls);
@@ -93,7 +90,7 @@ void ScriptHandler::TriggerEvent(std::string id, float deltaTime)
 
 void ScriptHandler::TriggerEvent(SDL_MouseButtonEvent event)
 {
-	ScriptHandlerInternal::SetState(ls, scriptPath, entityHandler, assetHandler);
+	ScriptHandlerInternal::SetState(ls, entityHandler, assetHandler);
 	
 	lua_getglobal(ls, "errorHandler");
 	int errorHandlerIndex = lua_gettop(ls);
@@ -113,7 +110,7 @@ void ScriptHandler::TriggerEvent(SDL_MouseButtonEvent event)
 }
 void ScriptHandler::TriggerEvent(SDL_MouseMotionEvent event)
 {
-	ScriptHandlerInternal::SetState(ls, scriptPath, entityHandler, assetHandler);
+	ScriptHandlerInternal::SetState(ls, entityHandler, assetHandler);
 
 	lua_getglobal(ls, "errorHandler");
 	int errorHandlerIndex = lua_gettop(ls);
@@ -133,7 +130,7 @@ void ScriptHandler::TriggerEvent(SDL_MouseMotionEvent event)
 }
 void ScriptHandler::TriggerEvent(SDL_KeyboardEvent event)
 {
-	ScriptHandlerInternal::SetState(ls, scriptPath, entityHandler, assetHandler);
+	ScriptHandlerInternal::SetState(ls, entityHandler, assetHandler);
 
 	lua_getglobal(ls, "errorHandler");
 	int errorHandlerIndex = lua_gettop(ls);

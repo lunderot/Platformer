@@ -7,15 +7,13 @@
 namespace ScriptHandlerInternal
 {
 	extern lua_State* ls;
-	extern std::string scriptPath;
 
 	extern AssetHandler* assetHandler;
 	extern EntityHandler* entityHandler;
 
-	static void SetState(lua_State* ls, std::string scriptPath, EntityHandler* entityHandler, AssetHandler* assetHandler)
+	static void SetState(lua_State* ls, EntityHandler* entityHandler, AssetHandler* assetHandler)
 	{
 		ScriptHandlerInternal::ls = ls;
-		ScriptHandlerInternal::scriptPath = scriptPath;
 		ScriptHandlerInternal::entityHandler = entityHandler;
 		ScriptHandlerInternal::assetHandler = assetHandler;
 	}
