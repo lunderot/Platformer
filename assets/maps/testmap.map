@@ -16,4 +16,5 @@ t assets/textures/tiles/grassCenter.png 5 1
 
 t assets/textures/tiles/boxItem.png 2 -2
 
-l -35 -35 385 -35
+l -35 -35 10085 -35
+l 385 -35 385 -100

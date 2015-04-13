@@ -44,9 +44,9 @@ void EntityHandler::Update(float deltaTime)
 
 					//Calculate reflection vector
 					Vec2f incidentVec = (*i)->GetVelocity();
-					Vec2f out = incidentVec - lineNormal * (2.0f * incidentVec.Dot(lineNormal));
+					Vec2f out = incidentVec + lineNormal;
 
-					(*i)->SetVelocity(out*0.9f);
+					(*i)->SetVelocity(out);
 				}
 			}
 		}
