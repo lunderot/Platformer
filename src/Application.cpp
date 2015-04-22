@@ -14,6 +14,8 @@ Application::Application(Vec2i screenSize, std::string title) : System(screenSiz
 
 	scriptHandler->AddFile("assets/scripts/test.lua");
 
+	scriptHandler->AddFile("assets/scripts/editor.lua");
+
 	mapHandler = new MapHandler("assets/maps/testmap.map", entityHandler, assetHandler, scriptHandler);
 }
 
