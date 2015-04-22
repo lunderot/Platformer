@@ -1,7 +1,7 @@
 #include "MapHandler.h"
 
 
-MapHandler::MapHandler(std::string filename, EntityHandler* entityHandler, AssetHandler* assetHandler)
+MapHandler::MapHandler(std::string filename, EntityHandler* entityHandler, AssetHandler* assetHandler, ScriptHandler* scriptHandler)
 {
 	tilesize = 70.0f;
 
@@ -14,7 +14,7 @@ MapHandler::MapHandler(std::string filename, EntityHandler* entityHandler, Asset
 			mapFile >> command;
 			switch (command)
 			{
-				case 'i':
+				case 'i': //Map info
 				{
 					mapFile >> tilesize;
 					break;
@@ -57,6 +57,13 @@ MapHandler::MapHandler(std::string filename, EntityHandler* entityHandler, Asset
 					position = position * tilesize;
 
 					entityHandler->Add(new Tile(assetHandler->GetTexture(textureFilename), tilesize, position));
+					break;
+				}
+				case 's': //Add script
+				{
+					std::string scriptFilename;
+					mapFile >> scriptFilename;
+					scriptHandler->AddFile(scriptFilename);
 					break;
 				}
 				default:
