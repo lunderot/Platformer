@@ -19,6 +19,7 @@ ScriptHandler::ScriptHandler(EntityHandler* entityHandler, AssetHandler* assetHa
 	AddFunction(ScriptHandlerInternal::GetCameraSize, "GetCameraSize");
 	AddFunction(ScriptHandlerInternal::GetWorldPositionFromScreenPosition, "GetWorldPositionFromScreenPosition");
 	AddFunction(ScriptHandlerInternal::AddEntity, "AddEntity");
+	AddFunction(ScriptHandlerInternal::AddCollisionLine, "AddCollisionLine");
 
 
 	AddFunction(ScriptHandlerInternal::GetEntityPosition, "GetEntityPosition");

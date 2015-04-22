@@ -72,6 +72,18 @@ namespace ScriptHandlerInternal
 		return 1;
 	}
 
+	static int AddCollisionLine(lua_State* ls) //AddCollisionLine(x1, y1, x2, y2)
+	{
+		Vec2f point1;
+		Vec2f point2;
+		point1.x = static_cast<float>(luaL_checknumber(ls, 1));
+		point1.y = static_cast<float>(luaL_checknumber(ls, 2));
+		point2.x = static_cast<float>(luaL_checknumber(ls, 3));
+		point2.y = static_cast<float>(luaL_checknumber(ls, 4));
+		entityHandler->AddCollisionLine(new LineSegment(point1, point2));
+		return 0;
+	}
+
 	//Entity functions
 	static int GetEntityPosition(lua_State* ls) //x,y = GetEntityPosition(id)
 	{
