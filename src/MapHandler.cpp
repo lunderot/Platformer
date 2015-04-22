@@ -61,6 +61,8 @@ MapHandler::MapHandler(std::string filename, EntityHandler* entityHandler, Asset
 				}
 				default:
 				{
+					std::string tempString;
+					std::getline(mapFile, tempString);
 					break;
 				}
 			}
