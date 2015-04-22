@@ -30,12 +30,6 @@ function keyboardEventHandler(key, state, repeating)
 end
 --addEventHandler("keyboardEvent", keyboardEventHandler)
 
-function cameraUpdate(deltaTime)
-	local x,y = GetEntityPosition(0)
-	SetEntityPosition(GetCameraId(), x, y)
-end
-addEventHandler("update", cameraUpdate)
-
 function entityTest(button, clicks, state, x, y)
 	if state == 1 then
 		local camx, camy = GetEntityPosition(GetCameraId())

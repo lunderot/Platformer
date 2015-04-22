@@ -9,8 +9,10 @@ Application::Application(Vec2i screenSize, std::string title) : System(screenSiz
 	entityHandler->Add(new Camera(Vec2f(static_cast<float>(screenSize.x), static_cast<float>(screenSize.y)), Vec2f(0.0f, 0.0f)));
 
 	scriptHandler = new ScriptHandler(entityHandler, assetHandler);
-	scriptHandler->AddFile("assets/scripts/test.lua");
+	scriptHandler->AddFile("assets/scripts/camera.lua");
 	scriptHandler->AddFile("assets/scripts/controls.lua");
+
+	scriptHandler->AddFile("assets/scripts/test.lua");
 
 	mapHandler = new MapHandler("assets/maps/testmap.map", entityHandler, assetHandler, scriptHandler);
 }
