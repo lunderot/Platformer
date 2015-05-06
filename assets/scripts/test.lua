@@ -39,4 +39,4 @@ function entityTest(button, clicks, state, x, y)
 		SetEntityAcceleration(id, 0, 100)
 	end
 end
-addEventHandler("mouseButtonEvent", entityTest)
+--addEventHandler("mouseButtonEvent", entityTest)
