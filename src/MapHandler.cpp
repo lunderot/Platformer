@@ -75,6 +75,10 @@ MapHandler::MapHandler(std::string filename, EntityHandler* entityHandler, Asset
 			}
 		}
 	}
+	else
+	{
+		throw std::runtime_error("File error: " + filename);
+	}
 	mapFile.close();
 }
 
