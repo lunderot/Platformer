@@ -129,3 +129,38 @@ int EntityHandler::GetCameraId()
 {
 	return cameraId;
 }
+
+void EntityHandler::SaveToFile(std::string filename, AssetHandler* assetHandler)
+{
+	std::ofstream file(filename);
+	if (file.good())
+	{
+		//Save entities
+		for (std::vector<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+		{
+			Tile* tile = dynamic_cast<Tile*>(*i);
+			if (tile)
+			{
+				Vec2f position = tile->GetPosition();
+				file << "t " << assetHandler->GetFilenameFromPointer(tile->texture) << " " << position.x << " " << position.y;
+			}
+			file << std::endl;
+		}
+		//Save collision lines
+		for (std::vector<LineSegment*>::iterator i = collisionLines.begin(); i != collisionLines.end(); ++i)
+		{
+			file << "l "
+				<< (*i)->point[0].x << " "
+				<< (*i)->point[0].y << " "
+				<< (*i)->point[1].x << " "
+				<< (*i)->point[1].y;
+			file << std::endl;
+		}
+	}
+	else
+	{
+		throw std::runtime_error("Failed to create: " + filename);
+	}
+	file.close();
+}
+

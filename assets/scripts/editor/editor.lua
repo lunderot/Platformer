@@ -23,6 +23,15 @@ function placeTypeChange(key, state, repeating)
 end
 addEventHandler("keyboardEvent", placeTypeChange)
 
+function placeTypeChange(key, state, repeating)
+	if state == 1 and not repeating then
+		if key == GetKeyCodeFromName("F8") then
+			SaveToFile("assets/maps/test.map")
+		end
+	end
+end
+addEventHandler("keyboardEvent", placeTypeChange)
+
 function mouseButtonEventHandler(button, clicks, state, x, y)
 	if state == 1 and clicks == 1 then
 		if placeType == 1 then --Place collision line

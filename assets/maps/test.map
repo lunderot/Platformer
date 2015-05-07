@@ -1,0 +1,52 @@
+
+t assets/textures/tiles/box.png -210 0
+t assets/textures/tiles/box.png -140 0
+t assets/textures/tiles/box.png -70 0
+t assets/textures/tiles/box.png 0 0
+t assets/textures/tiles/box.png 280 0
+t assets/textures/tiles/box.png 350 0
+t assets/textures/tiles/box.png 420 0
+t assets/textures/tiles/box.png 420 70
+t assets/textures/tiles/box.png 420 210
+t assets/textures/tiles/box.png 420 140
+t assets/textures/tiles/box.png 420 280
+t assets/textures/tiles/box.png 280 280
+t assets/textures/tiles/box.png 350 280
+t assets/textures/tiles/box.png 210 280
+t assets/textures/tiles/box.png 140 280
+t assets/textures/tiles/box.png 70 280
+t assets/textures/tiles/box.png 0 280
+t assets/textures/tiles/box.png -70 280
+t assets/textures/tiles/box.png -70 210
+t assets/textures/tiles/box.png -140 280
+t assets/textures/tiles/box.png -210 280
+t assets/textures/tiles/box.png -280 280
+t assets/textures/tiles/box.png -280 210
+t assets/textures/tiles/box.png -350 140
+t assets/textures/tiles/box.png -420 70
+t assets/textures/tiles/box.png -490 0
+t assets/textures/tiles/box.png -560 -70
+t assets/textures/tiles/box.png -560 -140
+t assets/textures/tiles/box.png -490 -140
+t assets/textures/tiles/box.png -420 -140
+t assets/textures/tiles/box.png -350 -140
+l -595 -175 -315 -175
+l -315 -175 -315 -105
+l -315 -105 -525 -105
+l -525 -105 -525 -35
+l -525 -35 -245 245
+l -245 245 -105 245
+l -105 175 -105 245
+l -105 175 -35 175
+l -35 245 385 245
+l -35 175 -35 245
+l 385 245 385 35
+l 385 35 245 35
+l 245 35 245 -35
+l 245 -35 455 -35
+l 455 -35 455 315
+l 35 -35 -245 -35
+l -245 -35 -245 35
+l -245 35 35 35
+l 35 35 35 -35
+l -595 -175 -595 -35

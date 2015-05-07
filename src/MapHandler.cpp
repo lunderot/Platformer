@@ -54,7 +54,7 @@ MapHandler::MapHandler(std::string filename, EntityHandler* entityHandler, Asset
 					mapFile >> position.x;
 					mapFile >> position.y;
 
-					position = position * tilesize;
+					position = position;
 
 					entityHandler->Add(new Tile(assetHandler->GetTexture(textureFilename), tilesize, position));
 					break;

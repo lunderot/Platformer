@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <fstream>
 
 #include "Entity.h"
 #include "Tile.h"
@@ -27,5 +28,7 @@ public:
 
 	Entity* GetEntity(int id);
 	int GetCameraId();
+
+	void SaveToFile(std::string filename, AssetHandler* assetHandler);
 };
 

@@ -32,8 +32,6 @@ Application::Application(Vec2i screenSize, std::string title, int argc, char* ar
 		}
 		mapHandler = new MapHandler(mapFilename, entityHandler, assetHandler, scriptHandler);
 	}
-
-	
 }
 
 

@@ -16,6 +16,7 @@ public:
 	~AssetHandler();
 
 	SDL_Texture* GetTexture(std::string filename);
+	std::string GetFilenameFromPointer(SDL_Texture* texture);
 private:
 	SDL_Texture* LoadTexture(std::string filename);
 };

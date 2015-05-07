@@ -28,6 +28,17 @@ SDL_Texture* AssetHandler::GetTexture(std::string filename)
 	return returnTexture;
 }
 
+std::string AssetHandler::GetFilenameFromPointer(SDL_Texture* texture)
+{
+	for (std::map<std::string, SDL_Texture*>::iterator i = textures.begin(); i != textures.end(); ++i)
+	{
+		if ((*i).second == texture)
+		{
+			return (*i).first;
+		}
+	}
+}
+
 SDL_Texture* AssetHandler::LoadTexture(std::string filename)
 {
 	SDL_Texture* returnTexture;

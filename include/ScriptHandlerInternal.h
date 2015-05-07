@@ -84,6 +84,13 @@ namespace ScriptHandlerInternal
 		return 0;
 	}
 
+	static int SaveToFile(lua_State* ls) //SaveToFile(filename)
+	{
+		std::string filename(luaL_checkstring(ls, 1));
+		entityHandler->SaveToFile(filename, assetHandler);
+		return 0;
+	}
+
 	//Entity functions
 	static int GetEntityPosition(lua_State* ls) //x,y = GetEntityPosition(id)
 	{
