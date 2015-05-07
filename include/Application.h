@@ -19,8 +19,9 @@ private:
 	EntityHandler* entityHandler;
 	ScriptHandler* scriptHandler;
 	MapHandler* mapHandler;
+	bool editorMode;
 public:
-	Application(Vec2i screenSize, std::string title);
+	Application(Vec2i screenSize, std::string title, int argc, char* argv[]);
 	virtual ~Application();
 
 	void HandleEvent(SDL_Event& event);
