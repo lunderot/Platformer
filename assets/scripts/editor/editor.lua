@@ -6,6 +6,7 @@ local isPlacingLine = false
 local line = {}
 
 local tileSize = 70
+local tileIndex = 1
 
 function getNearestMultiple(number, multiple)
 	return math.floor(number / multiple) * multiple
@@ -23,14 +24,34 @@ function placeTypeChange(key, state, repeating)
 end
 addEventHandler("keyboardEvent", placeTypeChange)
 
-function placeTypeChange(key, state, repeating)
+function saveMap(key, state, repeating)
 	if state == 1 and not repeating then
 		if key == GetKeyCodeFromName("F8") then
 			SaveToFile("assets/maps/test.map")
 		end
 	end
 end
-addEventHandler("keyboardEvent", placeTypeChange)
+addEventHandler("keyboardEvent", saveMap)
+
+function changeTile(key, state, repeating)
+	if state == 1 and not repeating then
+		if key == GetKeyCodeFromName("0") then
+			if tileIndex == #tiles then
+				tileIndex = 1
+			else
+				tileIndex = tileIndex + 1
+			end
+		end
+		if key == GetKeyCodeFromName("9") then
+			if tileIndex == 1 then
+				tileIndex = #tiles
+			else
+				tileIndex = tileIndex - 1
+			end
+		end
+	end
+end
+addEventHandler("keyboardEvent", changeTile)
 
 function mouseButtonEventHandler(button, clicks, state, x, y)
 	if state == 1 and clicks == 1 then
@@ -56,7 +77,7 @@ function mouseButtonEventHandler(button, clicks, state, x, y)
 								y = getNearestMultiple(tpy + tileSize/2, tileSize)
 							}
 			
-			local id = AddEntity(1, "assets/textures/tiles/box.png", tileSize)
+			local id = AddEntity(1, tiles[tileIndex], tileSize)
 			SetEntityPosition(id, tilePos.x, tilePos.y)
 		end
 	end
