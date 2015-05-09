@@ -84,6 +84,14 @@ namespace ScriptHandlerInternal
 		return 0;
 	}
 
+	static int RemoveEntity(lua_State* ls) //result = RemoveEntity(id)
+	{
+		unsigned int id = luaL_checknumber(ls, 1);
+		bool result = entityHandler->Remove(id);
+		lua_pushboolean(ls, result);
+		return 1;
+	}
+
 	static int SaveToFile(lua_State* ls) //SaveToFile(filename)
 	{
 		std::string filename(luaL_checkstring(ls, 1));

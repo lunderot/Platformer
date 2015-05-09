@@ -3,15 +3,16 @@
 
 EntityHandler::EntityHandler()
 {
+	entityIndex = 0;
 	cameraId = -1;
 }
 
 
 EntityHandler::~EntityHandler()
 {
-	for (std::vector<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+	for (std::map<unsigned int, Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 	{
-		delete *i;
+		delete (*i).second;
 	}
 	for (std::vector<LineSegment*>::iterator j = collisionLines.begin(); j != collisionLines.end(); ++j)
 	{
@@ -21,21 +22,21 @@ EntityHandler::~EntityHandler()
 
 void EntityHandler::Update(float deltaTime)
 {
-	for (std::vector<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+	for (std::map<unsigned int, Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 	{
-		(*i)->Update(deltaTime);
+		(*i).second->Update(deltaTime);
 
-		if (dynamic_cast<Player*>((*i))) //Don't check physics for tiles and camera
+		if (dynamic_cast<Player*>((*i).second)) //Don't check physics for tiles and camera
 		{
-			(*i)->velocity += (*i)->acceleration * deltaTime;
-			(*i)->position += (*i)->velocity * deltaTime;
+			(*i).second->velocity += (*i).second->acceleration * deltaTime;
+			(*i).second->position += (*i).second->velocity * deltaTime;
 
 			//Check and resolve collision with lines
 			for (std::vector<LineSegment*>::iterator j = collisionLines.begin(); j != collisionLines.end(); ++j)
 			{
 				//Calculate offset and move entity
-				Vec2f offset = LineSegmentCircleCollision(*(*j), (*i)->GetBoundingCircle());
-				(*i)->position += offset;
+				Vec2f offset = LineSegmentCircleCollision(*(*j), (*i).second->GetBoundingCircle());
+				(*i).second->position += offset;
 
 				if (offset.Length() > 0.0f)
 				{
@@ -43,10 +44,10 @@ void EntityHandler::Update(float deltaTime)
 					Vec2f lineNormal = offset.Normalized();
 
 					//Calculate reflection vector
-					Vec2f incidentVec = (*i)->GetVelocity();
+					Vec2f incidentVec = (*i).second->GetVelocity();
 					Vec2f out = incidentVec + lineNormal;
 
-					(*i)->SetVelocity(out);
+					(*i).second->SetVelocity(out);
 				}
 			}
 		}
@@ -55,9 +56,9 @@ void EntityHandler::Update(float deltaTime)
 
 void EntityHandler::Render(SDL_Renderer* renderer)
 {
-	for (std::vector<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+	for (std::map<unsigned int, Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 	{
-		(*i)->Render(renderer, GetEntity(cameraId));
+		(*i).second->Render(renderer, GetEntity(cameraId));
 	}
 	Camera* cam = dynamic_cast<Camera*>(GetEntity(cameraId));
 	Vec2f cameraPosition = GetEntity(cameraId)->GetPosition();
@@ -77,8 +78,9 @@ void EntityHandler::Render(SDL_Renderer* renderer)
 int EntityHandler::Add(Entity* entity)
 {
 	int returnValue = -1;
-	returnValue = entities.size();
-	entities.push_back(entity);
+	returnValue = entityIndex;
+	entities.insert(std::pair<unsigned int, Entity*>(entityIndex, entity));
+	entityIndex++;
 
 	if (dynamic_cast<Camera*>(entity))
 	{
@@ -120,9 +122,22 @@ void EntityHandler::AddCollisionLine(LineSegment* line)
 	collisionLines.push_back(line);
 }
 
-Entity* EntityHandler::GetEntity(int id)
+bool EntityHandler::Remove(unsigned int id)
 {
-	return entities.at(id);
+	bool returnValue = false;
+	std::map<unsigned int, Entity*>::iterator it = entities.find(id);
+
+	if (it != entities.end())
+	{
+		entities.erase(it);
+		returnValue = true;
+	}
+	return returnValue;
+}
+
+Entity* EntityHandler::GetEntity(unsigned int id)
+{
+	return entities[id];
 }
 
 int EntityHandler::GetCameraId()
@@ -136,9 +151,9 @@ void EntityHandler::SaveToFile(std::string filename, AssetHandler* assetHandler)
 	if (file.good())
 	{
 		//Save entities
-		for (std::vector<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+		for (std::map<unsigned int, Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 		{
-			Tile* tile = dynamic_cast<Tile*>(*i);
+			Tile* tile = dynamic_cast<Tile*>((*i).second);
 			if (tile)
 			{
 				Vec2f position = tile->GetPosition();

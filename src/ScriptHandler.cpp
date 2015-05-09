@@ -20,6 +20,7 @@ ScriptHandler::ScriptHandler(EntityHandler* entityHandler, AssetHandler* assetHa
 	AddFunction(ScriptHandlerInternal::GetWorldPositionFromScreenPosition, "GetWorldPositionFromScreenPosition");
 	AddFunction(ScriptHandlerInternal::AddEntity, "AddEntity");
 	AddFunction(ScriptHandlerInternal::AddCollisionLine, "AddCollisionLine");
+	AddFunction(ScriptHandlerInternal::RemoveEntity, "RemoveEntity");
 	AddFunction(ScriptHandlerInternal::SaveToFile, "SaveToFile");
 
 	AddFunction(ScriptHandlerInternal::GetEntityPosition, "GetEntityPosition");

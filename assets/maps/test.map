@@ -180,3 +180,5 @@ t assets/textures/tiles/torch.png -70 1120
 t assets/textures/tiles/window.png 0 1120
 t assets/textures/tiles/box.png 70 1120
 t assets/textures/tiles/box.png -350 910
+
+l -140 -70 140 -70

@@ -7,6 +7,7 @@ local line = {}
 
 local tileSize = 70
 local tileIndex = 1
+local tilesPlaced = {}
 
 function getNearestMultiple(number, multiple)
 	return math.floor(number / multiple) * multiple
@@ -53,6 +54,18 @@ function changeTile(key, state, repeating)
 end
 addEventHandler("keyboardEvent", changeTile)
 
+function undoHandler(key, state, repeating)
+	if state == 1 and not repeating then
+		if key == GetKeyCodeFromName("Z") then
+			if #tilesPlaced > 0 then
+				RemoveEntity(tilesPlaced[#tilesPlaced])
+				tilesPlaced[#tilesPlaced] = nil
+			end
+		end
+	end
+end
+addEventHandler("keyboardEvent", undoHandler)
+
 function mouseButtonEventHandler(button, clicks, state, x, y)
 	if state == 1 and clicks == 1 then
 		if placeType == 1 then --Place collision line
@@ -79,6 +92,7 @@ function mouseButtonEventHandler(button, clicks, state, x, y)
 			
 			local id = AddEntity(1, tiles[tileIndex], tileSize)
 			SetEntityPosition(id, tilePos.x, tilePos.y)
+			table.insert(tilesPlaced, id)
 		end
 	end
 end

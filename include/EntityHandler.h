@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <map>
 #include <fstream>
 
 #include "Entity.h"
@@ -12,7 +13,8 @@
 
 class EntityHandler
 {
-	std::vector<Entity*> entities;
+	std::map<unsigned int, Entity*> entities;
+	unsigned int entityIndex;
 	std::vector<LineSegment*> collisionLines;
 	int cameraId;
 public:
@@ -26,7 +28,9 @@ public:
 	int Add(EntityType type, std::string textureFilename, float radius, AssetHandler* assetHandler);
 	void AddCollisionLine(LineSegment* line);
 
-	Entity* GetEntity(int id);
+	bool Remove(unsigned int id);
+
+	Entity* GetEntity(unsigned int id);
 	int GetCameraId();
 
 	void SaveToFile(std::string filename, AssetHandler* assetHandler);
