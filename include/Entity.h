@@ -8,7 +8,8 @@ enum EntityType
 {
 	PLAYER,
 	TILE,
-	CAMERA
+	CAMERA,
+	MARKER
 };
 
 class Entity

@@ -9,6 +9,10 @@ local tileSize = 70
 local tileIndex = 1
 local tilesPlaced = {}
 
+local markerTexture = "assets/textures/marker.png"
+
+local markerEntity = AddEntity(3, markerTexture, tileSize/2)
+
 function getNearestMultiple(number, multiple)
 	return math.floor(number / multiple) * multiple
 end
@@ -17,9 +21,11 @@ function placeTypeChange(key, state, repeating)
 	if state == 1 and not repeating then
 		if key == GetKeyCodeFromName("1") then
 			placeType = 1
+			SetMarkerTexture(markerEntity, markerTexture)
 		elseif key == GetKeyCodeFromName("2") then
 			isPlacingLine = false
 			placeType = 2
+			SetMarkerTexture(markerEntity, tiles[tileIndex])
 		end
 	end
 end
@@ -35,7 +41,7 @@ end
 addEventHandler("keyboardEvent", saveMap)
 
 function changeTile(key, state, repeating)
-	if state == 1 and not repeating then
+	if state == 1 then
 		if key == GetKeyCodeFromName("0") then
 			if tileIndex == #tiles then
 				tileIndex = 1
@@ -49,6 +55,9 @@ function changeTile(key, state, repeating)
 			else
 				tileIndex = tileIndex - 1
 			end
+		end
+		if placeType == 2 then
+			SetMarkerTexture(markerEntity, tiles[tileIndex])
 		end
 	end
 end
@@ -97,3 +106,17 @@ function mouseButtonEventHandler(button, clicks, state, x, y)
 	end
 end
 addEventHandler("mouseButtonEvent", mouseButtonEventHandler)
+
+function editorMouseEvent(state, x, y, xrel, yrel)
+	local tpx, tpy = GetWorldPositionFromScreenPosition(x, y)
+	local tilePos = {x = 0, y = 0}
+	if placeType == 2 then
+		tilePos.x = getNearestMultiple(tpx + tileSize/2, tileSize)
+		tilePos.y = getNearestMultiple(tpy + tileSize/2, tileSize)
+	else
+		tilePos.x = getNearestMultiple(tpx, tileSize) + tileSize / 2
+		tilePos.y = getNearestMultiple(tpy, tileSize) + tileSize / 2
+	end
+	SetEntityPosition(markerEntity, tilePos.x, tilePos.y)
+end
+addEventHandler("mouseMotionEvent", editorMouseEvent)

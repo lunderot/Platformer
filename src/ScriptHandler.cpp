@@ -33,6 +33,7 @@ ScriptHandler::ScriptHandler(EntityHandler* entityHandler, AssetHandler* assetHa
 	AddFunction(ScriptHandlerInternal::SetEntityAcceleration, "SetEntityAcceleration");
 
 	AddFunction(ScriptHandlerInternal::GetEntityRadius, "GetEntityRadius");
+	AddFunction(ScriptHandlerInternal::SetMarkerTexture, "SetMarkerTexture");
 }
 
 ScriptHandler::~ScriptHandler()

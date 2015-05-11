@@ -163,4 +163,16 @@ namespace ScriptHandlerInternal
 		lua_pushnumber(ls, r);
 		return 1;
 	}
+
+	static int SetMarkerTexture(lua_State* ls) //SetMarkerTexture(id, filename)
+	{
+		int id = static_cast<int>(luaL_checknumber(ls, 1));
+		std::string filename(luaL_checkstring(ls, 2));
+		Marker* marker = dynamic_cast<Marker*>(entityHandler->GetEntity(id));
+		if (marker)
+		{
+			marker->SetTexture(assetHandler->GetTexture(filename));
+		}
+		return 0;
+	}
 }

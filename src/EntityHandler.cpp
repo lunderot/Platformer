@@ -107,6 +107,9 @@ int EntityHandler::Add(EntityType type, std::string textureFilename, float radiu
 	case TILE:
 		entity = new Tile(assetHandler->GetTexture(textureFilename), radius);
 		break;
+	case MARKER:
+		entity = new Marker(assetHandler->GetTexture(textureFilename), radius);
+		break;
 	default:
 		break;
 	}

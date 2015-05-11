@@ -29,7 +29,7 @@ function playerInput(key, state, repeating)
 			end
 		end
 		SetEntityAcceleration(GetFirstPlayerId(), input.x, input.y+gravity)
-		local xvel, yvel = GetEntityVelocity(0)
+		local xvel, yvel = GetEntityVelocity(GetFirstPlayerId())
 		SetEntityVelocity(GetFirstPlayerId(), xvel, yvel+jump)
 	end
 end

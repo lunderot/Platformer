@@ -8,6 +8,7 @@
 #include "Tile.h"
 #include "Camera.h"
 #include "Player.h"
+#include "Marker.h"
 
 #include "AssetHandler.h"
 
