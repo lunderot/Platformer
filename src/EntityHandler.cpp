@@ -67,10 +67,10 @@ void EntityHandler::Render(SDL_Renderer* renderer)
 	{
 		SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
 		SDL_RenderDrawLine(renderer,
-			(*j)->point[0].x - cameraPosition.x + cameraSize.x/2,
-			(*j)->point[0].y - cameraPosition.y + cameraSize.y/2,
-			(*j)->point[1].x - cameraPosition.x + cameraSize.x/2,
-			(*j)->point[1].y - cameraPosition.y + cameraSize.y/2
+			static_cast<int>((*j)->point[0].x - cameraPosition.x + cameraSize.x/2),
+			static_cast<int>((*j)->point[0].y - cameraPosition.y + cameraSize.y/2),
+			static_cast<int>((*j)->point[1].x - cameraPosition.x + cameraSize.x/2),
+			static_cast<int>((*j)->point[1].y - cameraPosition.y + cameraSize.y/2)
 		);
 	}
 }

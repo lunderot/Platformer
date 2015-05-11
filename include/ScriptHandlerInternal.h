@@ -86,7 +86,7 @@ namespace ScriptHandlerInternal
 
 	static int RemoveEntity(lua_State* ls) //result = RemoveEntity(id)
 	{
-		unsigned int id = luaL_checknumber(ls, 1);
+		unsigned int id = static_cast<unsigned int>(luaL_checknumber(ls, 1));
 		bool result = entityHandler->Remove(id);
 		lua_pushboolean(ls, result);
 		return 1;

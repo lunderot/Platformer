@@ -37,6 +37,7 @@ std::string AssetHandler::GetFilenameFromPointer(SDL_Texture* texture)
 			return (*i).first;
 		}
 	}
+	return "";
 }
 
 SDL_Texture* AssetHandler::LoadTexture(std::string filename)
