@@ -8,7 +8,7 @@ Application::Application(Vec2i screenSize, std::string title, int argc, char* ar
 
 	if (!editorMode)
 	{
-		entityHandler->Add(new Player(assetHandler->GetTexture("assets/textures/tiles/boxAlt.png"), 35, Vec2f(300, -100), Vec2f(100, 0), Vec2f(0, 300)));
+		entityHandler->Add(new Player(assetHandler->GetTexture("assets/textures/player.png"), 35, Vec2f(300, -100), Vec2f(100, 0), Vec2f(0, 300)));
 	}
 	entityHandler->Add(new Camera(Vec2f(static_cast<float>(screenSize.x), static_cast<float>(screenSize.y)), Vec2f(0.0f, 0.0f)));
 
