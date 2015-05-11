@@ -28,14 +28,6 @@ t assets/textures/tiles/castleHalfLeft.png 280 70
 t assets/textures/tiles/castleHalfMid.png 350 70
 t assets/textures/tiles/castleHalfRight.png 420 70
 t assets/textures/tiles/castleHillLeft.png 490 70
-t assets/textures/tiles/castleHillLeft2.png -140 140
-t assets/textures/tiles/castleHillLeft.png -490 140
-t assets/textures/tiles/castleHillLeft.png -420 140
-t assets/textures/tiles/castleHillLeft.png -420 70
-t assets/textures/tiles/castleHillLeft.png -350 0
-t assets/textures/tiles/castleHillLeft.png -280 -70
-t assets/textures/tiles/castleHillLeft.png -210 -70
-t assets/textures/tiles/castleHillLeft.png -210 -140
 t assets/textures/tiles/castleHillLeft2.png -70 140
 t assets/textures/tiles/castleHillRight.png 0 140
 t assets/textures/tiles/castleHillRight2.png 70 140
@@ -178,7 +170,5 @@ t assets/textures/tiles/tochLit.png 490 1050
 t assets/textures/tiles/tochLit2.png -140 1120
 t assets/textures/tiles/torch.png -70 1120
 t assets/textures/tiles/window.png 0 1120
-t assets/textures/tiles/box.png 70 1120
-t assets/textures/tiles/box.png -350 910
 
 l -140 -70 140 -70

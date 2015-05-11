@@ -1,5 +1,5 @@
 function cameraUpdate(deltaTime)
-	local x,y = GetEntityPosition(0)
+	local x,y = GetEntityPosition(GetFirstPlayerId())
 	SetEntityPosition(GetCameraId(), x, y)
 end
 addEventHandler("update", cameraUpdate)

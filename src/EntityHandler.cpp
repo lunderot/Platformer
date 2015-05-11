@@ -145,6 +145,18 @@ int EntityHandler::GetCameraId()
 	return cameraId;
 }
 
+int EntityHandler::GetFirstPlayerId()
+{
+	for (std::map<unsigned int, Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+	{
+		if (dynamic_cast<Player*>((*i).second))
+		{
+			return (*i).first;
+		}
+	}
+	return -1;
+}
+
 void EntityHandler::SaveToFile(std::string filename, AssetHandler* assetHandler)
 {
 	std::ofstream file(filename);

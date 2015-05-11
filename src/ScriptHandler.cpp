@@ -22,6 +22,7 @@ ScriptHandler::ScriptHandler(EntityHandler* entityHandler, AssetHandler* assetHa
 	AddFunction(ScriptHandlerInternal::AddCollisionLine, "AddCollisionLine");
 	AddFunction(ScriptHandlerInternal::RemoveEntity, "RemoveEntity");
 	AddFunction(ScriptHandlerInternal::SaveToFile, "SaveToFile");
+	AddFunction(ScriptHandlerInternal::GetFirstPlayerId, "GetFirstPlayerId");
 
 	AddFunction(ScriptHandlerInternal::GetEntityPosition, "GetEntityPosition");
 	AddFunction(ScriptHandlerInternal::GetEntityVelocity, "GetEntityVelocity");

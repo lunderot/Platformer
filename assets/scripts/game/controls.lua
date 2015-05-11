@@ -28,9 +28,9 @@ function playerInput(key, state, repeating)
 				input.x = 0
 			end
 		end
-		SetEntityAcceleration(0, input.x, input.y+gravity)
+		SetEntityAcceleration(GetFirstPlayerId(), input.x, input.y+gravity)
 		local xvel, yvel = GetEntityVelocity(0)
-		SetEntityVelocity(0, xvel, yvel+jump)
+		SetEntityVelocity(GetFirstPlayerId(), xvel, yvel+jump)
 	end
 end
 addEventHandler("keyboardEvent", playerInput)

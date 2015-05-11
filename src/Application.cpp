@@ -20,12 +20,10 @@ Application::Application(Vec2i screenSize, std::string title, int argc, char* ar
 	}
 	else
 	{
-		scriptHandler->AddFile("assets/scripts/camera.lua");
-		scriptHandler->AddFile("assets/scripts/controls.lua");
-		
-		scriptHandler->AddFile("assets/scripts/test.lua");
+		scriptHandler->AddFile("assets/scripts/game/camera.lua");
+		scriptHandler->AddFile("assets/scripts/game/controls.lua");
 
-		std::string mapFilename = "assets/maps/testmap.map";
+		std::string mapFilename = "assets/maps/test.map";
 		if (argc == 2)
 		{
 			mapFilename = std::string(argv[1]);

@@ -99,6 +99,12 @@ namespace ScriptHandlerInternal
 		return 0;
 	}
 
+	static int GetFirstPlayerId(lua_State* ls) //id = GetFirstPlayerId()
+	{
+		lua_pushnumber(ls, entityHandler->GetFirstPlayerId());
+		return 1;
+	}
+
 	//Entity functions
 	static int GetEntityPosition(lua_State* ls) //x,y = GetEntityPosition(id)
 	{

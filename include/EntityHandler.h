@@ -33,6 +33,8 @@ public:
 	Entity* GetEntity(unsigned int id);
 	int GetCameraId();
 
+	int GetFirstPlayerId();
+
 	void SaveToFile(std::string filename, AssetHandler* assetHandler);
 };
 
