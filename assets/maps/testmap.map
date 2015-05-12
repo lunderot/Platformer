@@ -1,20 +1,44 @@
-i 70
 
-t assets/textures/tiles/grassLeft.png 0 0
-t assets/textures/tiles/grassMid.png 1 0
-t assets/textures/tiles/grassMid.png 2 0
-t assets/textures/tiles/grassMid.png 3 0
-t assets/textures/tiles/grassMid.png 4 0
-t assets/textures/tiles/grassRight.png 5 0
 
-t assets/textures/tiles/grassCenter.png 0 1
-t assets/textures/tiles/grassCenter.png 1 1
-t assets/textures/tiles/grassCenter.png 2 1
-t assets/textures/tiles/grassCenter.png 3 1
-t assets/textures/tiles/grassCenter.png 4 1
-t assets/textures/tiles/grassCenter.png 5 1
-
-t assets/textures/tiles/boxItem.png 2 -2
-
-l -35 -35 10085 -35
-l 385 -35 385 -100
+t assets/textures/tiles/castleCenter.png -420 210
+t assets/textures/tiles/castleCenter.png -350 210
+t assets/textures/tiles/castleCenter.png -280 210
+t assets/textures/tiles/castleCenter.png -210 210
+t assets/textures/tiles/castleCenter.png -140 210
+t assets/textures/tiles/castleCenter.png -70 210
+t assets/textures/tiles/castleHillRight.png 0 140
+t assets/textures/tiles/castleHillLeft2.png 0 210
+t assets/textures/tiles/castleMid.png -70 140
+t assets/textures/tiles/castleMid.png -140 140
+t assets/textures/tiles/castleMid.png -210 140
+t assets/textures/tiles/castleMid.png -280 140
+t assets/textures/tiles/castleMid.png -350 140
+t assets/textures/tiles/castleMid.png -420 140
+t assets/textures/tiles/castleHalfLeft.png -490 140
+t assets/textures/tiles/door_openMid.png -140 70
+t assets/textures/tiles/door_openTop.png -140 0
+t assets/textures/tiles/grass.png 140 70
+t assets/textures/tiles/sandCenter.png 280 140
+t assets/textures/tiles/sandCenter.png 350 140
+t assets/textures/tiles/sandCenter.png 420 140
+t assets/textures/tiles/sandCenter.png 490 140
+t assets/textures/tiles/sandCenter.png 560 140
+t assets/textures/tiles/sandCenter.png 630 140
+t assets/textures/tiles/sandCenter.png 700 140
+t assets/textures/tiles/sandCenter.png 700 210
+t assets/textures/tiles/sandCenter.png 630 210
+t assets/textures/tiles/sandCenter.png 560 210
+t assets/textures/tiles/sandCenter.png 490 210
+t assets/textures/tiles/sandCenter.png 420 210
+t assets/textures/tiles/sandCenter.png 350 210
+t assets/textures/tiles/sandCenter.png 280 210
+t assets/textures/tiles/sandHillRight.png 770 140
+t assets/textures/tiles/sandHillRight.png 700 70
+t assets/textures/tiles/sandMid.png 630 70
+t assets/textures/tiles/sandMid.png 560 70
+t assets/textures/tiles/sandMid.png 490 70
+t assets/textures/tiles/sandMid.png 420 70
+t assets/textures/tiles/sandMid.png 350 70
+t assets/textures/tiles/sandMid.png 280 70
+t assets/textures/tiles/sign.png 490 0
+l -245 -105 175 105

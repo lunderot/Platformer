@@ -173,18 +173,20 @@ void EntityHandler::SaveToFile(std::string filename, AssetHandler* assetHandler)
 			{
 				Vec2f position = tile->GetPosition();
 				file << "t " << assetHandler->GetFilenameFromPointer(tile->texture) << " " << position.x << " " << position.y;
+				file << std::endl;
 			}
-			file << std::endl;
+			
 		}
 		//Save collision lines
 		for (std::vector<LineSegment*>::iterator i = collisionLines.begin(); i != collisionLines.end(); ++i)
 		{
+			file << std::endl;
 			file << "l "
 				<< (*i)->point[0].x << " "
 				<< (*i)->point[0].y << " "
 				<< (*i)->point[1].x << " "
 				<< (*i)->point[1].y;
-			file << std::endl;
+			
 		}
 	}
 	else
