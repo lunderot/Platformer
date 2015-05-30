@@ -42,6 +42,10 @@
     <IncludePath>D:\Libraries\vc\SDL2_image-2.0.0\include;include;D:\Libraries\vc\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
     <LibraryPath>D:\Libraries\vc\SDL2_image-2.0.0\lib\x86;D:\Libraries\vc\SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>D:\Libraries\vc\SDL2_image-2.0.0\lib\x86;D:\Libraries\vc\SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Libraries\vc\SDL2_image-2.0.0\include;include;D:\Libraries\vc\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -68,6 +72,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;LuaLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
