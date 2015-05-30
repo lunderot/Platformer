@@ -8,6 +8,7 @@ local line = {}
 local tileSize = 70
 local tileIndex = 1
 local tilesPlaced = {}
+local savePath = "assets/maps/"
 
 local markerTexture = "assets/textures/marker.png"
 
@@ -34,7 +35,7 @@ addEventHandler("keyboardEvent", placeTypeChange)
 function saveMap(key, state, repeating)
 	if state == 1 and not repeating then
 		if key == GetKeyCodeFromName("F8") then
-			SaveToFile("assets/maps/test.map")
+			SaveToFile(savePath .. os.date("%d-%m-%y %H.%M.map"))
 		end
 	end
 end
