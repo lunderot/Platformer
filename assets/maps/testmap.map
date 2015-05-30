@@ -1,5 +1,6 @@
-
-
+e 0 assets/textures/player.png 35
+s assets/scripts/game/camera.lua
+s assets/scripts/game/controls.lua
 t assets/textures/tiles/castleCenter.png -420 210
 t assets/textures/tiles/castleCenter.png -350 210
 t assets/textures/tiles/castleCenter.png -280 210
@@ -41,4 +42,3 @@ t assets/textures/tiles/sandMid.png 420 70
 t assets/textures/tiles/sandMid.png 350 70
 t assets/textures/tiles/sandMid.png 280 70
 t assets/textures/tiles/sign.png 490 0
-l -245 -105 175 105

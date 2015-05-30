@@ -1,3 +1,6 @@
+e 0 assets/textures/player.png 35
+s assets/scripts/game/camera.lua
+s assets/scripts/game/controls.lua
 t assets/textures/tiles/box.png -210 -210
 t assets/textures/tiles/box.png -70 -140
 t assets/textures/tiles/boxCoin_disabled.png 140 70
