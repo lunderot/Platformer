@@ -34,3 +34,12 @@ function playerInput(key, state, repeating)
 	end
 end
 addEventHandler("keyboardEvent", playerInput)
+
+function playerTeleport(button, clicks, state, x, y)
+	if state == 1 and button == 3 then
+		local wx, wy = GetWorldPositionFromScreenPosition(x, y)
+		SetEntityPosition(GetFirstPlayerId(), wx, wy)
+		SetEntityVelocity(GetFirstPlayerId(), 0, 0)
+	end
+end
+addEventHandler("mouseButtonEvent", playerTeleport)
