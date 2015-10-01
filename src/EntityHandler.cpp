@@ -35,17 +35,17 @@ void EntityHandler::Update(float deltaTime)
 			for (std::vector<LineSegment*>::iterator j = collisionLines.begin(); j != collisionLines.end(); ++j)
 			{
 				//Calculate offset and move entity
-				Vec2f offset = LineSegmentCircleCollision(*(*j), (*i).second->GetBoundingCircle());
+				glm::vec2 offset = LineSegmentCircleCollision(*(*j), (*i).second->GetBoundingCircle());
 				(*i).second->position += offset;
-
-				if (offset.Length() > 0.0f)
+				
+				if (glm::length(offset) > 0.0f)
 				{
 					//Calculate line normal
-					Vec2f lineNormal = offset.Normalized();
+					glm::vec2 lineNormal = glm::normalize(offset);
 
 					//Calculate reflection vector
-					Vec2f incidentVec = (*i).second->GetVelocity();
-					Vec2f out = incidentVec + lineNormal;
+					glm::vec2 incidentVec = (*i).second->GetVelocity();
+					glm::vec2 out = incidentVec + lineNormal;
 
 					(*i).second->SetVelocity(out);
 				}
@@ -61,8 +61,8 @@ void EntityHandler::Render(SDL_Renderer* renderer)
 		(*i).second->Render(renderer, GetEntity(cameraId));
 	}
 	Camera* cam = dynamic_cast<Camera*>(GetEntity(cameraId));
-	Vec2f cameraPosition = GetEntity(cameraId)->GetPosition();
-	Vec2f cameraSize = cam->GetSize();
+	glm::vec2 cameraPosition = GetEntity(cameraId)->GetPosition();
+	glm::vec2 cameraSize = cam->GetSize();
 	for (std::vector<LineSegment*>::iterator j = collisionLines.begin(); j != collisionLines.end(); ++j)
 	{
 		SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
@@ -171,7 +171,7 @@ void EntityHandler::SaveToFile(std::string filename, AssetHandler* assetHandler)
 			Tile* tile = dynamic_cast<Tile*>((*i).second);
 			if (tile)
 			{
-				Vec2f position = tile->GetPosition();
+				glm::vec2 position = tile->GetPosition();
 				file << "t " << assetHandler->GetFilenameFromPointer(tile->texture) << " " << position.x << " " << position.y;
 				file << std::endl;
 			}

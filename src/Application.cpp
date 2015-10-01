@@ -1,11 +1,11 @@
 #include "Application.h"
 
-Application::Application(Vec2i screenSize, std::string title, int argc, char* argv[]) : System(screenSize, title)
+Application::Application(glm::ivec2 screenSize, std::string title, int argc, char* argv[]) : System(screenSize, title)
 {
 	assetHandler = new AssetHandler(GetRenderer());
 	entityHandler = new EntityHandler();
 
-	entityHandler->Add(new Camera(Vec2f(static_cast<float>(screenSize.x), static_cast<float>(screenSize.y)), Vec2f(0.0f, 0.0f)));
+	entityHandler->Add(new Camera(glm::vec2(static_cast<float>(screenSize.x), static_cast<float>(screenSize.y)), glm::vec2(0.0f, 0.0f)));
 
 	scriptHandler = new ScriptHandler(entityHandler, assetHandler);
 	std::string mapFile("assets/maps/editor.map");

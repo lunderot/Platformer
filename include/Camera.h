@@ -3,11 +3,11 @@
 class Camera : public Entity
 {
 private:
-	Vec2f size;
+	glm::vec2 size;
 public:
-	Camera(Vec2f size, Vec2f position = Vec2f());
+	Camera(glm::vec2 size, glm::vec2 position = glm::vec2());
 	~Camera();
 
-	Vec2f GetSize();
+	glm::vec2 GetSize();
 };
 

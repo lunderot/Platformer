@@ -7,12 +7,12 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
-#include "math\Vec2.h"
+#include <glm/glm.hpp>
 
 class System
 {
 private:
-	Vec2i screenSize;
+	glm::ivec2 screenSize;
 	bool running;
 
 	SDL_Window* window;
@@ -20,11 +20,11 @@ private:
 	SDL_Event event;
 	
 public:
-	System(Vec2i screenSize, std::string title);
+	System(glm::ivec2 screenSize, std::string title);
 	virtual ~System();
 
 	void Run();
-	Vec2i GetScreenSize() const;
+	glm::ivec2 GetScreenSize() const;
 	SDL_Renderer* GetRenderer() const;
 	SDL_Window* GetWindow() const;
 

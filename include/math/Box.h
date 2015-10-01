@@ -1,14 +1,14 @@
 #pragma once
 
-#include "math/Vec2.h"
+#include <glm/glm.hpp>
 
 class Box
 {
 public:
-	Vec2f position;
-	Vec2f size;
+	glm::vec2 position;
+	glm::vec2 size;
 public:
-	Box(Vec2f position, Vec2f size);
+	Box(glm::vec2 position, glm::vec2 size);
 	~Box();
 };
 

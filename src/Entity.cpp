@@ -2,7 +2,7 @@
 
 #include "Camera.h"
 
-Entity::Entity(SDL_Texture* texture, float radius, Vec2f position, Vec2f velocity, Vec2f acceleration)
+Entity::Entity(SDL_Texture* texture, float radius, glm::vec2 position, glm::vec2 velocity, glm::vec2 acceleration)
 {
 	this->texture = texture;
 	this->radius = radius;
@@ -23,8 +23,8 @@ void Entity::Update(float deltaTime)
 
 void Entity::Render(SDL_Renderer* renderer, Entity* camera)
 {
-	Vec2f cameraPosition = camera->GetPosition();
-	Vec2f cameraSize = dynamic_cast<Camera*>(camera)->GetSize();
+	glm::vec2 cameraPosition = camera->GetPosition();
+	glm::vec2 cameraSize = dynamic_cast<Camera*>(camera)->GetSize();
 	SDL_Rect destination =
 	{
 		static_cast<int>((position.x - radius) - cameraPosition.x + cameraSize.x/2),
@@ -40,32 +40,32 @@ Circle Entity::GetBoundingCircle() const
 	return Circle(position, radius);
 }
 
-void Entity::SetPosition(Vec2f position)
+void Entity::SetPosition(glm::vec2 position)
 {
 	this->position = position;
 }
 
-void Entity::SetVelocity(Vec2f velocity)
+void Entity::SetVelocity(glm::vec2 velocity)
 {
 	this->velocity = velocity;
 }
 
-void Entity::SetAcceleration(Vec2f acceleration)
+void Entity::SetAcceleration(glm::vec2 acceleration)
 {
 	this->acceleration = acceleration;
 }
 
-Vec2f Entity::GetPosition() const
+glm::vec2 Entity::GetPosition() const
 {
 	return position;
 }
 
-Vec2f Entity::GetVelocity() const
+glm::vec2 Entity::GetVelocity() const
 {
 	return velocity;
 }
 
-Vec2f Entity::GetAcceleration() const
+glm::vec2 Entity::GetAcceleration() const
 {
 	return acceleration;
 }

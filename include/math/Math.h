@@ -2,13 +2,13 @@
 #include <algorithm>
 #include <stdexcept>
 
-#include "math/Vec2.h"
+#include <glm/glm.hpp>
 #include "math/Box.h"
 
 #include "math/Circle.h"
 #include "math/LineSegment.h"
 
-float SweptAABB(Box box1, Vec2f box1vel, Box box2, Vec2f box2vel, Vec2f& normal);
+float SweptAABB(Box box1, glm::vec2 box1vel, Box box2, glm::vec2 box2vel, glm::vec2& normal);
 
-Vec2f ClosestPoint(LineSegment line, Circle circle);
-Vec2f LineSegmentCircleCollision(LineSegment line, Circle circle);
+glm::vec2 ClosestPoint(LineSegment line, Circle circle);
+glm::vec2 LineSegmentCircleCollision(LineSegment line, Circle circle);

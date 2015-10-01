@@ -19,11 +19,11 @@ protected:
 	SDL_Texture* texture;
 	float radius;
 
-	Vec2f position;
-	Vec2f velocity;
-	Vec2f acceleration;
+	glm::vec2 position;
+	glm::vec2 velocity;
+	glm::vec2 acceleration;
 public:
-	Entity(SDL_Texture* texture, float radius, Vec2f position = Vec2f(), Vec2f velocity = Vec2f(), Vec2f acceleration = Vec2f());
+	Entity(SDL_Texture* texture, float radius, glm::vec2 position = glm::vec2(), glm::vec2 velocity = glm::vec2(), glm::vec2 acceleration = glm::vec2());
 	virtual ~Entity();
 
 	virtual void Update(float deltaTime);
@@ -31,13 +31,13 @@ public:
 
 	Circle GetBoundingCircle() const;
 
-	void SetPosition(Vec2f position);
-	void SetVelocity(Vec2f velocity);
-	void SetAcceleration(Vec2f acceleration);
+	void SetPosition(glm::vec2 position);
+	void SetVelocity(glm::vec2 velocity);
+	void SetAcceleration(glm::vec2 acceleration);
 
-	Vec2f GetPosition() const;
-	Vec2f GetVelocity() const;
-	Vec2f GetAcceleration() const;
+	glm::vec2 GetPosition() const;
+	glm::vec2 GetVelocity() const;
+	glm::vec2 GetAcceleration() const;
 
 	float GetRadius() const;
 };

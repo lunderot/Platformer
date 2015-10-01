@@ -116,7 +116,6 @@
     <ClInclude Include="include\ScriptHandler.h" />
     <ClInclude Include="include\ScriptHandlerInternal.h" />
     <ClInclude Include="include\System.h" />
-    <ClInclude Include="include\math\Vec2.h" />
     <ClInclude Include="include\Tile.h" />
     <ClInclude Include="include\Marker.h" />
   </ItemGroup>

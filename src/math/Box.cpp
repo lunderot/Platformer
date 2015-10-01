@@ -1,7 +1,7 @@
 #include "math\Box.h"
 
 
-Box::Box(Vec2f position, Vec2f size)
+Box::Box(glm::vec2 position, glm::vec2 size)
 {
 	this->position = position;
 	this->size = size;

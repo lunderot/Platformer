@@ -1,6 +1,6 @@
 #include "System.h"
 
-System::System(Vec2i screenSize, std::string title)
+System::System(glm::ivec2 screenSize, std::string title)
 {
 	this->screenSize = screenSize;
 	this->running = true;
@@ -72,7 +72,7 @@ void System::Run()
 	}
 }
 
-Vec2i System::GetScreenSize() const
+glm::ivec2 System::GetScreenSize() const
 {
 	return screenSize;
 }

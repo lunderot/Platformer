@@ -3,7 +3,7 @@
 class Tile : public Entity
 {
 public:
-	Tile(SDL_Texture* texture, float size, Vec2f position = Vec2f());
+	Tile(SDL_Texture* texture, float size, glm::vec2 position = glm::vec2());
 	~Tile();
 };
 

@@ -1,9 +1,9 @@
 #include "math/Math.h"
 
-float SweptAABB(Box box1, Vec2f box1vel, Box box2, Vec2f box2vel, Vec2f& normal)
+float SweptAABB(Box box1, glm::vec2 box1vel, Box box2, glm::vec2 box2vel, glm::vec2& normal)
 {
-	Vec2f invEntry;
-	Vec2f invExit;
+	glm::vec2 invEntry;
+	glm::vec2 invExit;
 
 	if (box1vel.x > 0.0f)
 	{
@@ -27,8 +27,8 @@ float SweptAABB(Box box1, Vec2f box1vel, Box box2, Vec2f box2vel, Vec2f& normal)
 		invExit.y = box2.position.y - (box1.position.y + box1.size.y);
 	}
 
-	Vec2f entry;
-	Vec2f exit;
+	glm::vec2 entry;
+	glm::vec2 exit;
 	if (box1vel.x == 0.0f)
 	{
 		entry.x = -std::numeric_limits<float>::infinity();
@@ -92,41 +92,41 @@ float SweptAABB(Box box1, Vec2f box1vel, Box box2, Vec2f box2vel, Vec2f& normal)
 	}
 }
 
-Vec2f ClosestPoint(LineSegment line, Circle circle)
+glm::vec2 ClosestPoint(LineSegment line, Circle circle)
 {
-	Vec2f seg = line.point[1] - line.point[0];
-	Vec2f pt = circle.position - line.point[0];
-	if (seg.Length() <= 0.0f)
+	glm::vec2 seg = line.point[1] - line.point[0];
+	glm::vec2 pt = circle.position - line.point[0];
+	if (glm::length(seg) <= 0.0f)
 	{
 		throw std::runtime_error("Invalid line segment length");
 	}
-	Vec2f seg_unit = seg.Normalized();
-	float proj = pt.Dot(seg_unit);
+	glm::vec2 seg_unit = glm::normalize(seg);
+	float proj = glm::dot(pt, seg_unit);
 	if (proj <= 0.0f)
 	{
 		return line.point[0];
 	}
-	if (proj >= seg.Length())
+	if (proj >= glm::length(seg))
 	{
 		return line.point[1];
 	}
-	Vec2f proj_v = seg_unit * proj;
-	Vec2f closest = proj_v + line.point[0];
+	glm::vec2 proj_v = seg_unit * proj;
+	glm::vec2 closest = proj_v + line.point[0];
 	return closest;
 }
 
-Vec2f LineSegmentCircleCollision(LineSegment line, Circle circle)
+glm::vec2 LineSegmentCircleCollision(LineSegment line, Circle circle)
 {
-	Vec2f closest = ClosestPoint(line, circle);
-	Vec2f dist = circle.position - closest;
-	if (dist.Length() > circle.radius)
+	glm::vec2 closest = ClosestPoint(line, circle);
+	glm::vec2 dist = circle.position - closest;
+	if (glm::length(dist) > circle.radius)
 	{
-		return Vec2f(0.0f, 0.0f);
+		return glm::vec2(0.0f, 0.0f);
 	}
-	if (dist.Length() <= 0.0f)
+	if (glm::length(dist) <= 0.0f)
 	{
 		throw std::runtime_error("Circle's center is exactly on segment");
 	}
-	Vec2f offset = dist.Normalized() * (circle.radius - dist.Length());
+	glm::vec2 offset = glm::normalize(dist) * (circle.radius - glm::length(dist));
 	return offset;
 }

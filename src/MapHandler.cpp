@@ -21,8 +21,8 @@ MapHandler::MapHandler(std::string filename, EntityHandler* entityHandler, Asset
 				}
 				case 'l': //Add collision line
 				{
-					Vec2f point1;
-					Vec2f point2;
+					glm::vec2 point1;
+					glm::vec2 point2;
 
 					mapFile >> point1.x;
 					mapFile >> point1.y;
@@ -49,7 +49,7 @@ MapHandler::MapHandler(std::string filename, EntityHandler* entityHandler, Asset
 				case 't': //Add tile
 				{
 					std::string textureFilename;
-					Vec2f position;
+					glm::vec2 position;
 					mapFile >> textureFilename;
 					mapFile >> position.x;
 					mapFile >> position.y;

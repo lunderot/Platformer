@@ -1,13 +1,13 @@
 #pragma once
 
-#include "math/Vec2.h"
+#include <glm/glm.hpp>
 
 class LineSegment
 {
 public:
-	Vec2f point[2];
+	glm::vec2 point[2];
 public:
-	LineSegment(Vec2f point1, Vec2f point2);
+	LineSegment(glm::vec2 point1, glm::vec2 point2);
 	~LineSegment();
 };
 

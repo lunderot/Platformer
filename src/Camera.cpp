@@ -1,7 +1,7 @@
 #include "Camera.h"
 
 
-Camera::Camera(Vec2f size, Vec2f position) : Entity(nullptr, 0, position)
+Camera::Camera(glm::vec2 size, glm::vec2 position) : Entity(nullptr, 0, position)
 {
 	this->size = size;
 }
@@ -11,7 +11,7 @@ Camera::~Camera()
 {
 }
 
-Vec2f Camera::GetSize()
+glm::vec2 Camera::GetSize()
 {
 	return size;
 }

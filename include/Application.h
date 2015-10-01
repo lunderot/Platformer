@@ -20,7 +20,7 @@ private:
 	ScriptHandler* scriptHandler;
 	MapHandler* mapHandler;
 public:
-	Application(Vec2i screenSize, std::string title, int argc, char* argv[]);
+	Application(glm::ivec2 screenSize, std::string title, int argc, char* argv[]);
 	virtual ~Application();
 
 	void HandleEvent(SDL_Event& event);

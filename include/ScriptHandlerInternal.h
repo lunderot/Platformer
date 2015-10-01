@@ -45,7 +45,7 @@ namespace ScriptHandlerInternal
 	static int GetCameraSize(lua_State* ls) //w,h = GetCameraSize()
 	{
 		Camera* camera = dynamic_cast<Camera*>(entityHandler->GetEntity(entityHandler->GetCameraId()));
-		Vec2f size = camera->GetSize();
+		glm::vec2 size = camera->GetSize();
 		lua_pushnumber(ls, size.x);
 		lua_pushnumber(ls, size.y);
 		return 2;
@@ -55,8 +55,8 @@ namespace ScriptHandlerInternal
 		float x = static_cast<float>(luaL_checknumber(ls, 1));
 		float y = static_cast<float>(luaL_checknumber(ls, 2));
 		Camera* camera = dynamic_cast<Camera*>(entityHandler->GetEntity(entityHandler->GetCameraId()));
-		Vec2f camSize = camera->GetSize();
-		Vec2f camPosition = camera->GetPosition();
+		glm::vec2 camSize = camera->GetSize();
+		glm::vec2 camPosition = camera->GetPosition();
 		lua_pushnumber(ls, x + camPosition.x - camSize.x / 2);
 		lua_pushnumber(ls, y + camPosition.y - camSize.y / 2);
 		return 2;
@@ -74,8 +74,8 @@ namespace ScriptHandlerInternal
 
 	static int AddCollisionLine(lua_State* ls) //AddCollisionLine(x1, y1, x2, y2)
 	{
-		Vec2f point1;
-		Vec2f point2;
+		glm::vec2 point1;
+		glm::vec2 point2;
 		point1.x = static_cast<float>(luaL_checknumber(ls, 1));
 		point1.y = static_cast<float>(luaL_checknumber(ls, 2));
 		point2.x = static_cast<float>(luaL_checknumber(ls, 3));
@@ -109,7 +109,7 @@ namespace ScriptHandlerInternal
 	static int GetEntityPosition(lua_State* ls) //x,y = GetEntityPosition(id)
 	{
 		int id = static_cast<int>(luaL_checknumber(ls, 1));
-		Vec2f pos = entityHandler->GetEntity(id)->GetPosition();
+		glm::vec2 pos = entityHandler->GetEntity(id)->GetPosition();
 		lua_pushnumber(ls, pos.x);
 		lua_pushnumber(ls, pos.y);
 		return 2;
@@ -117,7 +117,7 @@ namespace ScriptHandlerInternal
 	static int GetEntityVelocity(lua_State* ls) //xvel,yvel = GetEntityVelocity(id)
 	{
 		int id = static_cast<int>(luaL_checknumber(ls, 1));
-		Vec2f vel = entityHandler->GetEntity(id)->GetVelocity();
+		glm::vec2 vel = entityHandler->GetEntity(id)->GetVelocity();
 		lua_pushnumber(ls, vel.x);
 		lua_pushnumber(ls, vel.y);
 		return 2;
@@ -125,7 +125,7 @@ namespace ScriptHandlerInternal
 	static int GetEntityAcceleration(lua_State* ls) //x,y = GetEntityAcceleration(id)
 	{
 		int id = static_cast<int>(luaL_checknumber(ls, 1));
-		Vec2f acc = entityHandler->GetEntity(id)->GetAcceleration();
+		glm::vec2 acc = entityHandler->GetEntity(id)->GetAcceleration();
 		lua_pushnumber(ls, acc.x);
 		lua_pushnumber(ls, acc.y);
 		return 2;
@@ -136,7 +136,7 @@ namespace ScriptHandlerInternal
 		int id = static_cast<int>(luaL_checknumber(ls, 1));
 		float x = static_cast<float>(luaL_checknumber(ls, 2));
 		float y = static_cast<float>(luaL_checknumber(ls, 3));
-		entityHandler->GetEntity(id)->SetPosition(Vec2f(x, y));
+		entityHandler->GetEntity(id)->SetPosition(glm::vec2(x, y));
 		return 0;
 	}
 	static int SetEntityVelocity(lua_State* ls) //SetEntityVelocity(id, xvel, yvel)
@@ -144,7 +144,7 @@ namespace ScriptHandlerInternal
 		int id = static_cast<int>(luaL_checknumber(ls, 1));
 		float xvel = static_cast<float>(luaL_checknumber(ls, 2));
 		float yvel = static_cast<float>(luaL_checknumber(ls, 3));
-		entityHandler->GetEntity(id)->SetVelocity(Vec2f(xvel, yvel));
+		entityHandler->GetEntity(id)->SetVelocity(glm::vec2(xvel, yvel));
 		return 0;
 	}
 	static int SetEntityAcceleration(lua_State* ls) //SetEntityAcceleration(id, xacc, yacc)
@@ -152,7 +152,7 @@ namespace ScriptHandlerInternal
 		int id = static_cast<int>(luaL_checknumber(ls, 1));
 		float xacc = static_cast<float>(luaL_checknumber(ls, 2));
 		float yacc = static_cast<float>(luaL_checknumber(ls, 3));
-		entityHandler->GetEntity(id)->SetAcceleration(Vec2f(xacc, yacc));
+		entityHandler->GetEntity(id)->SetAcceleration(glm::vec2(xacc, yacc));
 		return 0;
 	}
 

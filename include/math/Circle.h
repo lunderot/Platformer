@@ -1,14 +1,14 @@
 #pragma once
 
-#include "math/Vec2.h"
+#include <glm/glm.hpp>
 
 class Circle
 {
 public:
-	Vec2f position;
+	glm::vec2 position;
 	float radius;
 public:
-	Circle(Vec2f position, float radius);
+	Circle(glm::vec2 position, float radius);
 	~Circle();
 };
 
