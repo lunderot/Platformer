@@ -55,10 +55,10 @@ namespace ScriptHandlerInternal
 		float x = static_cast<float>(luaL_checknumber(ls, 1));
 		float y = static_cast<float>(luaL_checknumber(ls, 2));
 		Camera* camera = dynamic_cast<Camera*>(entityHandler->GetEntity(entityHandler->GetCameraId()));
-		glm::vec2 camSize = camera->GetSize();
-		glm::vec2 camPosition = camera->GetPosition();
-		lua_pushnumber(ls, x + camPosition.x - camSize.x / 2);
-		lua_pushnumber(ls, y + camPosition.y - camSize.y / 2);
+
+		glm::vec4 translatedPoint = glm::inverse(camera->GetCameraMatrix()) * glm::vec4(x, y, 1, 1);
+		lua_pushnumber(ls, translatedPoint.x);
+		lua_pushnumber(ls, translatedPoint.y);
 		return 2;
 	}
 

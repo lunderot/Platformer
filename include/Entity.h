@@ -27,7 +27,7 @@ public:
 	virtual ~Entity();
 
 	virtual void Update(float deltaTime);
-	virtual void Render(SDL_Renderer* renderer, Entity* camera);
+	virtual void Render(SDL_Renderer* renderer, const glm::mat4& cameraMatrix, float scale);
 
 	Circle GetBoundingCircle() const;
 

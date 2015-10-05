@@ -21,16 +21,16 @@ void Entity::Update(float deltaTime)
 
 }
 
-void Entity::Render(SDL_Renderer* renderer, Entity* camera)
+void Entity::Render(SDL_Renderer* renderer, const glm::mat4& cameraMatrix, float scale)
 {
-	glm::vec2 cameraPosition = camera->GetPosition();
-	glm::vec2 cameraSize = dynamic_cast<Camera*>(camera)->GetSize();
+	glm::vec4 translatedPoint0 = cameraMatrix * glm::vec4((position.x - radius), (position.y - radius), 1, 1);
+	//glm::vec4 translatedPoint1 = scaleMatrix * glm::vec4(radius * 2, radius * 2, 1, 1);
 	SDL_Rect destination =
 	{
-		static_cast<int>((position.x - radius) - cameraPosition.x + cameraSize.x/2),
-		static_cast<int>((position.y - radius) - cameraPosition.y + cameraSize.y/2),
-		static_cast<int>(radius * 2),
-		static_cast<int>(radius * 2)
+		static_cast<int>(translatedPoint0.x),
+		static_cast<int>(translatedPoint0.y),
+		static_cast<int>(radius * 2 * scale),
+		static_cast<int>(radius * 2 * scale)
 	};
 	SDL_RenderCopy(renderer, texture, nullptr, &destination);
 }

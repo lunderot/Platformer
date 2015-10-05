@@ -56,21 +56,25 @@ void EntityHandler::Update(float deltaTime)
 
 void EntityHandler::Render(SDL_Renderer* renderer)
 {
+	Camera* cam = dynamic_cast<Camera*>(GetEntity(cameraId));
+	glm::mat4 cameraMatrix = cam->GetCameraMatrix();
+	float scale = cam->GetScale();
 	for (std::map<unsigned int, Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 	{
-		(*i).second->Render(renderer, GetEntity(cameraId));
+		(*i).second->Render(renderer, cameraMatrix, scale);
 	}
-	Camera* cam = dynamic_cast<Camera*>(GetEntity(cameraId));
-	glm::vec2 cameraPosition = GetEntity(cameraId)->GetPosition();
-	glm::vec2 cameraSize = cam->GetSize();
+
 	for (std::vector<LineSegment*>::iterator j = collisionLines.begin(); j != collisionLines.end(); ++j)
 	{
+		glm::vec4 translatedPoint0 = cameraMatrix * glm::vec4((*j)->point[0], 1, 1);
+		glm::vec4 translatedPoint1 = cameraMatrix * glm::vec4((*j)->point[1], 1, 1);
+
 		SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
 		SDL_RenderDrawLine(renderer,
-			static_cast<int>((*j)->point[0].x - cameraPosition.x + cameraSize.x/2),
-			static_cast<int>((*j)->point[0].y - cameraPosition.y + cameraSize.y/2),
-			static_cast<int>((*j)->point[1].x - cameraPosition.x + cameraSize.x/2),
-			static_cast<int>((*j)->point[1].y - cameraPosition.y + cameraSize.y/2)
+			static_cast<int>(translatedPoint0.x),
+			static_cast<int>(translatedPoint0.y),
+			static_cast<int>(translatedPoint1.x),
+			static_cast<int>(translatedPoint1.y)
 		);
 	}
 }
