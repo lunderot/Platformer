@@ -66,6 +66,12 @@
     <ClCompile Include="src\Marker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\physics\Body.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\physics\CircleBody.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\System.h">
@@ -129,6 +135,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Marker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\physics\Body.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\physics\Impulse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\physics\CircleBody.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\physics\Moment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\physics\AngularImpulse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
