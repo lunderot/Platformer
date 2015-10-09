@@ -4,6 +4,9 @@
 
 #include "math/Math.h"
 
+#include "physics/Body.h"
+#include "physics/CircleBody.h"
+
 enum EntityType
 {
 	PLAYER,
@@ -16,29 +19,23 @@ class Entity
 {
 	friend class EntityHandler;
 protected:
-	SDL_Texture* texture;
-	float radius;
+	Body* physicsBody;
 
-	glm::vec2 position;
-	glm::vec2 velocity;
-	glm::vec2 acceleration;
+	SDL_Texture* texture;
+	glm::f32 renderRadius;
+	glm::vec2 renderPosition;
+	glm::f32 renderAngle;
 public:
-	Entity(SDL_Texture* texture, float radius, glm::vec2 position = glm::vec2(), glm::vec2 velocity = glm::vec2(), glm::vec2 acceleration = glm::vec2());
+	Entity(SDL_Texture* texture = nullptr, glm::f32 renderRadius = 0.0f, glm::vec2 renderPosition = glm::vec2(), glm::f32 renderAngle = 0.0f);
 	virtual ~Entity();
 
 	virtual void Update(float deltaTime);
 	virtual void Render(SDL_Renderer* renderer, const glm::mat4& cameraMatrix, float scale);
 
-	Circle GetBoundingCircle() const;
+	Body* GetPhysicsBody() const;
 
-	void SetPosition(glm::vec2 position);
-	void SetVelocity(glm::vec2 velocity);
-	void SetAcceleration(glm::vec2 acceleration);
-
-	glm::vec2 GetPosition() const;
-	glm::vec2 GetVelocity() const;
-	glm::vec2 GetAcceleration() const;
-
-	float GetRadius() const;
+	glm::f32 GetRenderRadius() const;
+	glm::vec2 GetRenderPosition() const;
+	glm::f32 GetRenderAngle() const;
 };
 

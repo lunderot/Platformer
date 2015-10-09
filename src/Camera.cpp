@@ -19,7 +19,7 @@ glm::vec2 Camera::GetSize()
 
 glm::mat4 Camera::GetCameraMatrix() const
 {
-	glm::mat4 result = glm::inverse(glm::translate(glm::mat4(), glm::vec3(position * scale - size * 0.5f, 0)));
+	glm::mat4 result = glm::inverse(glm::translate(glm::mat4(), glm::vec3(renderPosition * scale - size * 0.5f, 0)));
 	return glm::scale(result, glm::vec3(scale, scale, scale));
 }
 

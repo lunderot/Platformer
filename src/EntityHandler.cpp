@@ -25,32 +25,6 @@ void EntityHandler::Update(float deltaTime)
 	for (std::map<unsigned int, Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 	{
 		(*i).second->Update(deltaTime);
-
-		if (dynamic_cast<Player*>((*i).second)) //Don't check physics for tiles and camera
-		{
-			(*i).second->velocity += (*i).second->acceleration * deltaTime;
-			(*i).second->position += (*i).second->velocity * deltaTime;
-
-			//Check and resolve collision with lines
-			for (std::vector<LineSegment*>::iterator j = collisionLines.begin(); j != collisionLines.end(); ++j)
-			{
-				//Calculate offset and move entity
-				glm::vec2 offset = LineSegmentCircleCollision(*(*j), (*i).second->GetBoundingCircle());
-				(*i).second->position += offset;
-				
-				if (glm::length(offset) > 0.0f)
-				{
-					//Calculate line normal
-					glm::vec2 lineNormal = glm::normalize(offset);
-
-					//Calculate reflection vector
-					glm::vec2 incidentVec = (*i).second->GetVelocity();
-					glm::vec2 out = incidentVec + lineNormal;
-
-					(*i).second->SetVelocity(out);
-				}
-			}
-		}
 	}
 }
 
@@ -106,7 +80,7 @@ int EntityHandler::Add(EntityType type, std::string textureFilename, float radiu
 	switch (type)
 	{
 	case PLAYER:
-		entity = new Player(assetHandler->GetTexture(textureFilename), radius);
+		entity = new Player(assetHandler->GetTexture(textureFilename), radius, 10);
 		break;
 	case TILE:
 		entity = new Tile(assetHandler->GetTexture(textureFilename), radius);
@@ -175,7 +149,7 @@ void EntityHandler::SaveToFile(std::string filename, AssetHandler* assetHandler)
 			Tile* tile = dynamic_cast<Tile*>((*i).second);
 			if (tile)
 			{
-				glm::vec2 position = tile->GetPosition();
+				glm::vec2 position = tile->GetRenderPosition();
 				file << "t " << assetHandler->GetFilenameFromPointer(tile->texture) << " " << position.x << " " << position.y;
 				file << std::endl;
 			}

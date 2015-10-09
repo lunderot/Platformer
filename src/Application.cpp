@@ -5,7 +5,7 @@ Application::Application(glm::ivec2 screenSize, std::string title, int argc, cha
 	assetHandler = new AssetHandler(GetRenderer());
 	entityHandler = new EntityHandler();
 
-	entityHandler->Add(new Camera(glm::vec2(static_cast<float>(screenSize.x), static_cast<float>(screenSize.y)), glm::vec2(0.0f, 0.0f)));
+	entityHandler->Add(new Camera(glm::vec2(static_cast<float>(screenSize.x), static_cast<float>(screenSize.y)), glm::vec2(0.0f, 0.0f), 20.0f));
 
 	scriptHandler = new ScriptHandler(entityHandler, assetHandler);
 	std::string mapFile("assets/maps/editor.map");
@@ -14,6 +14,15 @@ Application::Application(glm::ivec2 screenSize, std::string title, int argc, cha
 		mapFile = std::string(argv[1]);
 	}
 	mapHandler = new MapHandler(mapFile, entityHandler, assetHandler, scriptHandler);
+
+	Player* testPhysics = new Player(assetHandler->GetTexture("assets/textures/circle.png"), 1, 10);
+	entityHandler->Add(testPhysics);
+
+	testPhysics->GetPhysicsBody()->ApplyForce(glm::vec2(0, 10), glm::vec2(1, 0));
+	testPhysics->GetPhysicsBody()->ApplyImpulse(glm::vec2(0, 10), 1.0f, glm::vec2(1, 0));
+
+	testPhysics->GetPhysicsBody()->ApplyForce(glm::vec2(0, 9.82f));
+	testPhysics->GetPhysicsBody()->ApplyImpulse(glm::vec2(0, -9.82f), 1.0f);
 }
 
 

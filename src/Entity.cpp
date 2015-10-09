@@ -2,13 +2,13 @@
 
 #include "Camera.h"
 
-Entity::Entity(SDL_Texture* texture, float radius, glm::vec2 position, glm::vec2 velocity, glm::vec2 acceleration)
+Entity::Entity(SDL_Texture* texture, glm::f32 renderRadius, glm::vec2 renderPosition, glm::f32 renderAngle)
 {
 	this->texture = texture;
-	this->radius = radius;
-	this->position = position;
-	this->velocity = velocity;
-	this->acceleration = acceleration;
+	this->renderRadius = renderRadius;
+	this->physicsBody = nullptr;
+	this->renderPosition = renderPosition;
+	this->renderAngle = renderAngle;
 }
 
 
@@ -18,59 +18,43 @@ Entity::~Entity()
 
 void Entity::Update(float deltaTime)
 {
-
 }
 
 void Entity::Render(SDL_Renderer* renderer, const glm::mat4& cameraMatrix, float scale)
 {
-	glm::vec4 translatedPoint0 = cameraMatrix * glm::vec4((position.x - radius), (position.y - radius), 1, 1);
-	//glm::vec4 translatedPoint1 = scaleMatrix * glm::vec4(radius * 2, radius * 2, 1, 1);
-	SDL_Rect destination =
+	if (texture)
 	{
-		static_cast<int>(translatedPoint0.x),
-		static_cast<int>(translatedPoint0.y),
-		static_cast<int>(radius * 2 * scale),
-		static_cast<int>(radius * 2 * scale)
-	};
-	SDL_RenderCopy(renderer, texture, nullptr, &destination);
+		if (physicsBody)
+		{
+			renderPosition = physicsBody->GetPosition();
+			renderAngle = physicsBody->GetAngle();
+		}
+		glm::vec4 translatedPoint0 = cameraMatrix * glm::vec4((renderPosition.x - renderRadius), (renderPosition.y - renderRadius), 1, 1);
+		SDL_Rect destination =
+		{
+			static_cast<int>(translatedPoint0.x),
+			static_cast<int>(translatedPoint0.y),
+			static_cast<int>(renderRadius * 2 * scale),
+			static_cast<int>(renderRadius * 2 * scale)
+		};
+		SDL_RenderCopyEx(renderer, texture, nullptr, &destination, glm::degrees(renderAngle), nullptr, SDL_FLIP_NONE);
+	}
 }
 
-Circle Entity::GetBoundingCircle() const
+Body* Entity::GetPhysicsBody() const
 {
-	return Circle(position, radius);
+	return physicsBody;
 }
 
-void Entity::SetPosition(glm::vec2 position)
+glm::f32 Entity::GetRenderRadius() const
 {
-	this->position = position;
+	return renderRadius;
 }
-
-void Entity::SetVelocity(glm::vec2 velocity)
+glm::vec2 Entity::GetRenderPosition() const
 {
-	this->velocity = velocity;
+	return renderPosition;
 }
-
-void Entity::SetAcceleration(glm::vec2 acceleration)
+glm::f32 Entity::GetRenderAngle() const
 {
-	this->acceleration = acceleration;
-}
-
-glm::vec2 Entity::GetPosition() const
-{
-	return position;
-}
-
-glm::vec2 Entity::GetVelocity() const
-{
-	return velocity;
-}
-
-glm::vec2 Entity::GetAcceleration() const
-{
-	return acceleration;
-}
-
-float Entity::GetRadius() const
-{
-	return radius;
+	return renderAngle;
 }

@@ -1,17 +1,19 @@
 #include "Player.h"
 
 
-Player::Player(SDL_Texture* texture, float radius, glm::vec2 position, glm::vec2 velocity, glm::vec2 acceleration)
-	:Entity(texture, radius, position, velocity, acceleration)
+Player::Player(SDL_Texture* texture, glm::f32 radius, glm::f32 mass, glm::vec2 position)
+	:Entity(texture, radius)
 {
+	this->physicsBody = new CircleBody(position, mass, radius);
 }
 
 
 Player::~Player()
 {
+	delete physicsBody;
 }
 
 void Player::Update(float deltaTime)
 {
-	
+	physicsBody->Update(deltaTime);
 }
