@@ -106,64 +106,149 @@ namespace ScriptHandlerInternal
 	}
 
 	//Entity functions
-	static int GetEntityPosition(lua_State* ls) //x,y = GetEntityPosition(id)
+	static int GetRenderPosition(lua_State* ls) //x,y = GetRenderPosition(id)
 	{
 		int id = static_cast<int>(luaL_checknumber(ls, 1));
-		glm::vec2 pos = entityHandler->GetEntity(id)->GetPosition();
-		lua_pushnumber(ls, pos.x);
-		lua_pushnumber(ls, pos.y);
-		return 2;
-	}
-	static int GetEntityVelocity(lua_State* ls) //xvel,yvel = GetEntityVelocity(id)
-	{
-		int id = static_cast<int>(luaL_checknumber(ls, 1));
-		glm::vec2 vel = entityHandler->GetEntity(id)->GetVelocity();
-		lua_pushnumber(ls, vel.x);
-		lua_pushnumber(ls, vel.y);
-		return 2;
-	}
-	static int GetEntityAcceleration(lua_State* ls) //x,y = GetEntityAcceleration(id)
-	{
-		int id = static_cast<int>(luaL_checknumber(ls, 1));
-		glm::vec2 acc = entityHandler->GetEntity(id)->GetAcceleration();
-		lua_pushnumber(ls, acc.x);
-		lua_pushnumber(ls, acc.y);
+
+		Entity* entity = entityHandler->GetEntity(id);
+		glm::vec2 position;
+		if (entity)
+		{
+			position = entity->GetRenderPosition();
+		}
+		lua_pushnumber(ls, position.x);
+		lua_pushnumber(ls, position.y);
 		return 2;
 	}
 
-	static int SetEntityPosition(lua_State* ls) //SetEntityPosition(id, x, y)
+	static int SetRenderPosition(lua_State* ls) //SetRenderPosition(id, x, y)
 	{
 		int id = static_cast<int>(luaL_checknumber(ls, 1));
-		float x = static_cast<float>(luaL_checknumber(ls, 2));
-		float y = static_cast<float>(luaL_checknumber(ls, 3));
-		entityHandler->GetEntity(id)->SetPosition(glm::vec2(x, y));
-		return 0;
-	}
-	static int SetEntityVelocity(lua_State* ls) //SetEntityVelocity(id, xvel, yvel)
-	{
-		int id = static_cast<int>(luaL_checknumber(ls, 1));
-		float xvel = static_cast<float>(luaL_checknumber(ls, 2));
-		float yvel = static_cast<float>(luaL_checknumber(ls, 3));
-		entityHandler->GetEntity(id)->SetVelocity(glm::vec2(xvel, yvel));
-		return 0;
-	}
-	static int SetEntityAcceleration(lua_State* ls) //SetEntityAcceleration(id, xacc, yacc)
-	{
-		int id = static_cast<int>(luaL_checknumber(ls, 1));
-		float xacc = static_cast<float>(luaL_checknumber(ls, 2));
-		float yacc = static_cast<float>(luaL_checknumber(ls, 3));
-		entityHandler->GetEntity(id)->SetAcceleration(glm::vec2(xacc, yacc));
+		glm::vec2 position;
+		position.x = static_cast<glm::f32>(luaL_checknumber(ls, 2));
+		position.y = static_cast<glm::f32>(luaL_checknumber(ls, 3));
+
+		Entity* entity = entityHandler->GetEntity(id);
+		if (entity)
+		{
+			entity->SetRenderPosition(position);
+		}
 		return 0;
 	}
 
-	static int GetEntityRadius(lua_State* ls) //r = GetEntityRadius(id)
+	//Physics functions
+	static int ApplyForceOffset(lua_State* ls) //ApplyForceOffset(id, forcex, forcey, offsetx, offsety)
 	{
 		int id = static_cast<int>(luaL_checknumber(ls, 1));
-		float r = entityHandler->GetEntity(id)->GetRadius();
-		lua_pushnumber(ls, r);
+		glm::f32 forcex =	static_cast<glm::f32>(luaL_checknumber(ls, 2));
+		glm::f32 forcey =	static_cast<glm::f32>(luaL_checknumber(ls, 3));
+		glm::f32 offsetx =	static_cast<glm::f32>(luaL_checknumber(ls, 4));
+		glm::f32 offsety =	static_cast<glm::f32>(luaL_checknumber(ls, 5));
+
+		Entity* entity = entityHandler->GetEntity(id);
+		if (entity)
+		{
+			Body* body = entity->GetPhysicsBody();
+			if (body)
+			{
+				body->ApplyForce(glm::vec2(forcex, forcey), glm::vec2(offsetx, offsety));
+			}
+		}
+		return 0;
+	}
+	static int ApplyForce(lua_State* ls) //ApplyForce(id, forcex, forcey)
+	{
+		int id = static_cast<int>(luaL_checknumber(ls, 1));
+		glm::f32 forcex = static_cast<glm::f32>(luaL_checknumber(ls, 2));
+		glm::f32 forcey = static_cast<glm::f32>(luaL_checknumber(ls, 3));
+
+		Entity* entity = entityHandler->GetEntity(id);
+		if (entity)
+		{
+			Body* body = entity->GetPhysicsBody();
+			if (body)
+			{
+				body->ApplyForce(glm::vec2(forcex, forcey));
+			}
+		}
+		return 0;
+	}
+	static int ApplyImpulseOffset(lua_State* ls) //ApplyImpulseOffset(id, forcex, forcey, time, offsetx, offsety)
+	{
+		int id = static_cast<int>(luaL_checknumber(ls, 1));
+		glm::f32 forcex = static_cast<glm::f32>(luaL_checknumber(ls, 2));
+		glm::f32 forcey = static_cast<glm::f32>(luaL_checknumber(ls, 3));
+		glm::f32 time = static_cast<glm::f32>(luaL_checknumber(ls, 4));
+		glm::f32 offsetx = static_cast<glm::f32>(luaL_checknumber(ls, 5));
+		glm::f32 offsety = static_cast<glm::f32>(luaL_checknumber(ls, 6));
+		
+		Entity* entity = entityHandler->GetEntity(id);
+		if (entity)
+		{
+			Body* body = entity->GetPhysicsBody();
+			if (body)
+			{
+				body->ApplyImpulse(glm::vec2(forcex, forcey), time, glm::vec2(offsetx, offsety));
+			}
+		}
+		return 0;
+	}
+	static int ApplyImpulse(lua_State* ls) //ApplyImpulse(id, forcex, forcey, time)
+	{
+		int id = static_cast<int>(luaL_checknumber(ls, 1));
+		glm::f32 forcex = static_cast<glm::f32>(luaL_checknumber(ls, 2));
+		glm::f32 forcey = static_cast<glm::f32>(luaL_checknumber(ls, 3));
+		glm::f32 time = static_cast<glm::f32>(luaL_checknumber(ls, 4));
+
+		Entity* entity = entityHandler->GetEntity(id);
+		if (entity)
+		{
+			Body* body = entity->GetPhysicsBody();
+			if (body)
+			{
+				body->ApplyImpulse(glm::vec2(forcex, forcey), time);
+			}
+		}
+		return 0;
+	}
+	static int GetPosition(lua_State* ls) //x,y = GetPosition(id)
+	{
+		int id = static_cast<int>(luaL_checknumber(ls, 1));
+		glm::vec2 position;
+
+		Entity* entity = entityHandler->GetEntity(id);
+		if (entity)
+		{
+			Body* body = entity->GetPhysicsBody();
+			if (body)
+			{
+				position = body->GetPosition();
+			}
+		}
+		lua_pushnumber(ls, position.x);
+		lua_pushnumber(ls, position.y);
+		return 2;
+	}
+
+	static int GetAngle(lua_State* ls) //a = GetAngle(id)
+	{
+		int id = static_cast<int>(luaL_checknumber(ls, 1));
+		glm::f32 angle;
+
+		Entity* entity = entityHandler->GetEntity(id);
+		if (entity)
+		{
+			Body* body = entity->GetPhysicsBody();
+			if (body)
+			{
+				angle = body->GetAngle();
+			}
+		}
+		lua_pushnumber(ls, angle);
 		return 1;
 	}
 
+	//Marker functions
 	static int SetMarkerTexture(lua_State* ls) //SetMarkerTexture(id, filename)
 	{
 		int id = static_cast<int>(luaL_checknumber(ls, 1));

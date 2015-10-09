@@ -58,3 +58,8 @@ glm::f32 Entity::GetRenderAngle() const
 {
 	return renderAngle;
 }
+
+void Entity::SetRenderPosition(glm::vec2 position)
+{
+	this->renderPosition = position;
+}

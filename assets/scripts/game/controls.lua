@@ -1,45 +1,34 @@
 
-local jumpVelocity = -300
-local walkAcceleration = 500
-local gravity = 500
+local controls =	{
+						up		= GetKeyCodeFromName("W"),
+						down	= GetKeyCodeFromName("S"),
+						left	= GetKeyCodeFromName("A"),
+						right	= GetKeyCodeFromName("D"),
+						spinr	= GetKeyCodeFromName("X"),
+						spinl	= GetKeyCodeFromName("Z")
+					}
+local force = 20
 
 function playerInput(key, state, repeating)
-	local input = { x = 0, y = 0 }
-	local jump = 0
+	local id = GetFirstPlayerId()
 	if not repeating then
-
-		if key == GetKeyCodeFromName("W") then
-			if state == 1 then
-				jump = jumpVelocity
-			end
+		if key == controls.up and state == 1 then
+			ApplyImpulse(id, 0, -force, 1)
+		elseif key == controls.down and state == 1 then
+			ApplyImpulse(id, 0, force, 1)
 		end
 
-
-		if key == GetKeyCodeFromName("A") then
-			if state == 1 then
-				input.x = -walkAcceleration
-			else
-				input.x = 0
-			end
-		elseif key == GetKeyCodeFromName("D") then
-			if state == 1 then
-				input.x = walkAcceleration
-			else
-				input.x = 0
-			end
+		if key == controls.left and state == 1 then
+			ApplyImpulse(id, -force, 0, 1)
+		elseif key == controls.right and state == 1 then
+			ApplyImpulse(id, force, 0, 1)
 		end
-		SetEntityAcceleration(GetFirstPlayerId(), input.x, input.y+gravity)
-		local xvel, yvel = GetEntityVelocity(GetFirstPlayerId())
-		SetEntityVelocity(GetFirstPlayerId(), xvel, yvel+jump)
+
+		if key == controls.spinl and state == 1 then
+			ApplyImpulseOffset(id, 0, -force, 1, 1, 0)
+		elseif key == controls.spinr and state == 1 then
+			ApplyImpulseOffset(id, 0, force, 1, 1, 0)
+		end
 	end
 end
 addEventHandler("keyboardEvent", playerInput)
-
-function playerTeleport(button, clicks, state, x, y)
-	if state == 1 and button == 3 then
-		local wx, wy = GetWorldPositionFromScreenPosition(x, y)
-		SetEntityPosition(GetFirstPlayerId(), wx, wy)
-		SetEntityVelocity(GetFirstPlayerId(), 0, 0)
-	end
-end
-addEventHandler("mouseButtonEvent", playerTeleport)

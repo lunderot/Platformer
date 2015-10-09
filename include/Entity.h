@@ -37,5 +37,7 @@ public:
 	glm::f32 GetRenderRadius() const;
 	glm::vec2 GetRenderPosition() const;
 	glm::f32 GetRenderAngle() const;
+
+	void SetRenderPosition(glm::vec2 position);
 };
 

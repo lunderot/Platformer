@@ -24,15 +24,17 @@ ScriptHandler::ScriptHandler(EntityHandler* entityHandler, AssetHandler* assetHa
 	AddFunction(ScriptHandlerInternal::SaveToFile, "SaveToFile");
 	AddFunction(ScriptHandlerInternal::GetFirstPlayerId, "GetFirstPlayerId");
 
-	AddFunction(ScriptHandlerInternal::GetEntityPosition, "GetEntityPosition");
-	AddFunction(ScriptHandlerInternal::GetEntityVelocity, "GetEntityVelocity");
-	AddFunction(ScriptHandlerInternal::GetEntityAcceleration, "GetEntityAcceleration");
+	AddFunction(ScriptHandlerInternal::GetRenderPosition, "GetRenderPosition");
+	AddFunction(ScriptHandlerInternal::SetRenderPosition, "SetRenderPosition");
 
-	AddFunction(ScriptHandlerInternal::SetEntityPosition, "SetEntityPosition");
-	AddFunction(ScriptHandlerInternal::SetEntityVelocity, "SetEntityVelocity");
-	AddFunction(ScriptHandlerInternal::SetEntityAcceleration, "SetEntityAcceleration");
+	AddFunction(ScriptHandlerInternal::ApplyForceOffset, "ApplyForceOffset");
+	AddFunction(ScriptHandlerInternal::ApplyForce, "ApplyForce");
+	AddFunction(ScriptHandlerInternal::ApplyImpulseOffset, "ApplyImpulseOffset");
+	AddFunction(ScriptHandlerInternal::ApplyImpulse, "ApplyImpulse");
 
-	AddFunction(ScriptHandlerInternal::GetEntityRadius, "GetEntityRadius");
+	AddFunction(ScriptHandlerInternal::GetPosition, "GetPosition");
+	AddFunction(ScriptHandlerInternal::GetAngle, "GetAngle");
+
 	AddFunction(ScriptHandlerInternal::SetMarkerTexture, "SetMarkerTexture");
 }
 
