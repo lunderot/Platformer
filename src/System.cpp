@@ -34,8 +34,8 @@ System::~System()
 
 void System::Run()
 {
-	float dt = 1 / 60.0f;
-	float currentTime = SDL_GetTicks() / 1000.0f;
+	float deltaTime = 1 / 60.0f;
+	float renderTime = 0.0f;
 
 	while (running)
 	{
@@ -53,22 +53,18 @@ void System::Run()
 			}
 		}
 		//Update
-		float newTime = SDL_GetTicks() / 1000.0f;
-		float frameTime = newTime - currentTime;
-		currentTime = newTime;
-		
-		while (frameTime > 0.0f)
-		{
-			float deltaTime = std::min(frameTime, dt);
-			Update(deltaTime);
-			frameTime -= deltaTime;
-		}
-		
+		Update(deltaTime);
 		//Render
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-		SDL_RenderClear(renderer);
-		Render();
-		SDL_RenderPresent(renderer);
+		float currentTime = SDL_GetTicks() / 1000.0f;
+		while (renderTime < 1.0f - deltaTime)
+		{
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+			SDL_RenderClear(renderer);
+			Render();
+			SDL_RenderPresent(renderer);
+			renderTime += (SDL_GetTicks() / 1000.0f) - currentTime;
+		}
+		renderTime = 0.0f;
 	}
 }
 
