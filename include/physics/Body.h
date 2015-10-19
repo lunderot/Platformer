@@ -42,6 +42,11 @@ public:
 	void SetVelocity(glm::vec2 velocity);
 	glm::vec2 GetVelocity() const;
 
+	void SetAcceleration(glm::vec2 acceleration);
+	glm::vec2 GetAcceleration() const;
+
 	glm::f32 GetAngle() const;
+
+	glm::f32 GetMass() const;
 };
 

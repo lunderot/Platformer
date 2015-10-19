@@ -59,7 +59,7 @@ void EntityHandler::Update(float deltaTime)
 						//Collision has occurred
 						//Set the velocity to the reflection vector
 						glm::vec2 i = circle->GetVelocity();
-						circle->SetVelocity(i - 2.0f * normal * glm::dot(normal, i));
+						circle->SetVelocity(i - 2.0f * normal * glm::dot(normal, i) * 0.8f);
 					}
 					
 				}

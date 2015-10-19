@@ -1,3 +1,4 @@
+SetRenderPosition(GetCameraId(), 390, 400)
 function cameraMouse(button, clicks, state, x, y)
 	if state == 1 and button == 1 then
 		local wx, wy = GetWorldPositionFromScreenPosition(x, y)

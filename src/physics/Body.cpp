@@ -129,7 +129,21 @@ glm::vec2 Body::GetVelocity() const
 	return velocity;
 }
 
+void Body::SetAcceleration(glm::vec2 acceleration)
+{
+	this->acceleration = acceleration;
+}
+glm::vec2 Body::GetAcceleration() const
+{
+	return acceleration;
+}
+
 glm::f32 Body::GetAngle() const
 {
 	return angle;
+}
+
+glm::f32 Body::GetMass() const
+{
+	return mass;
 }

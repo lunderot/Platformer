@@ -1,4 +1,4 @@
-e 0 assets/textures/player.png 5
+e 0 assets/textures/circle.png 5
 s assets/scripts/game/camera.lua
 s assets/scripts/game/controls.lua
 
