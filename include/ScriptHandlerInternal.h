@@ -229,6 +229,22 @@ namespace ScriptHandlerInternal
 		lua_pushnumber(ls, position.y);
 		return 2;
 	}
+	static int SetPosition(lua_State* ls) //SetPosition(id, x, y)
+	{
+		int id = static_cast<int>(luaL_checknumber(ls, 1));
+		glm::vec2 position(static_cast<glm::f32>(luaL_checknumber(ls, 2)), static_cast<glm::f32>(luaL_checknumber(ls, 3)));
+
+		Entity* entity = entityHandler->GetEntity(id);
+		if (entity)
+		{
+			Body* body = entity->GetPhysicsBody();
+			if (body)
+			{
+				body->SetPosition(position);
+			}
+		}
+		return 0;
+	}
 
 	static int GetAngle(lua_State* ls) //a = GetAngle(id)
 	{

@@ -33,6 +33,7 @@ ScriptHandler::ScriptHandler(EntityHandler* entityHandler, AssetHandler* assetHa
 	AddFunction(ScriptHandlerInternal::ApplyImpulse, "ApplyImpulse");
 
 	AddFunction(ScriptHandlerInternal::GetPosition, "GetPosition");
+	AddFunction(ScriptHandlerInternal::SetPosition, "SetPosition");
 	AddFunction(ScriptHandlerInternal::GetAngle, "GetAngle");
 
 	AddFunction(ScriptHandlerInternal::SetMarkerTexture, "SetMarkerTexture");
