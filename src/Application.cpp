@@ -14,6 +14,10 @@ Application::Application(glm::ivec2 screenSize, std::string title, int argc, cha
 		mapFile = std::string(argv[1]);
 	}
 	mapHandler = new MapHandler(mapFile, entityHandler, assetHandler, scriptHandler);
+
+	Flipper* flipper = new Flipper(assetHandler->GetTexture("assets/textures/player.png"), 20, 1);
+	entityHandler->Add(flipper);
+	flipper->GetPhysicsBody()->ApplyForce(glm::vec2(0, -10), glm::vec2(20, 0));
 }
 
 

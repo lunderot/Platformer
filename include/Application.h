@@ -11,6 +11,7 @@
 
 #include "Player.h"
 #include "Tile.h"
+#include "Flipper.h"
 
 class Application: public System
 {

@@ -6,6 +6,7 @@
 
 #include "physics/Body.h"
 #include "physics/CircleBody.h"
+#include "physics/LineBody.h"
 
 enum EntityType
 {
