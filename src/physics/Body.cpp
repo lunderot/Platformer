@@ -119,6 +119,16 @@ glm::vec2 Body::GetPosition() const
 	return position;
 }
 
+void Body::SetVelocity(glm::vec2 velocity)
+{
+	this->velocity = velocity;
+}
+
+glm::vec2 Body::GetVelocity() const
+{
+	return velocity;
+}
+
 glm::f32 Body::GetAngle() const
 {
 	return angle;

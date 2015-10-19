@@ -1,5 +1,6 @@
 #include "EntityHandler.h"
 
+#include <iostream>
 
 EntityHandler::EntityHandler()
 {
@@ -24,7 +25,50 @@ void EntityHandler::Update(float deltaTime)
 {
 	for (std::map<unsigned int, Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
 	{
-		(*i).second->Update(deltaTime);
+		CircleBody* circle = dynamic_cast<CircleBody*>(i->second->GetPhysicsBody());
+		if (circle)
+		{
+			glm::f32 radius = circle->GetRadius();
+			glm::vec2 center = circle->GetPosition();
+			for (std::vector<LineSegment*>::iterator c = collisionLines.begin(); c != collisionLines.end(); ++c)
+			{
+				glm::vec2 point0 = (*c)->point[0];
+				glm::vec2 point1 = (*c)->point[1];
+
+				glm::vec2 normal(	
+									(point1.y - point0.y)*-1.0f,
+									(point1.x - point0.x)
+								);
+				normal = glm::normalize(normal);
+
+				glm::f32 distance = glm::abs(glm::dot(center - point0, normal));
+				
+				if (distance < radius)
+				{
+					glm::vec2 line = point1 - point0;
+					glm::f32 len = glm::length(line);
+					glm::vec2 b = glm::normalize(line);
+					glm::vec2 proj = glm::dot(center - point0, b) * b;
+
+					
+					glm::f32 result = glm::dot(line, proj) / len;
+
+					if (result > -1.0f * radius &&
+						result < len + radius)
+					{
+						//Collision has occurred
+						//Set the velocity to the reflection vector
+						glm::vec2 i = circle->GetVelocity();
+						circle->SetVelocity(i - 2.0f * normal * glm::dot(normal, i));
+					}
+					
+				}
+				
+			}
+
+			
+		}
+		i->second->Update(deltaTime);
 	}
 }
 

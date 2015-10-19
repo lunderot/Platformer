@@ -39,6 +39,9 @@ public:
 	void SetPosition(glm::vec2 position);
 	glm::vec2 GetPosition() const;
 
+	void SetVelocity(glm::vec2 velocity);
+	glm::vec2 GetVelocity() const;
+
 	glm::f32 GetAngle() const;
 };
 

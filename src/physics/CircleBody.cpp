@@ -15,3 +15,8 @@ glm::f32 CircleBody::GetInertia() const
 {
 	return (2.0f * mass * radius * radius) / 5.0f;
 }
+
+glm::f32 CircleBody::GetRadius() const
+{
+	return radius;
+}

@@ -11,5 +11,7 @@ public:
 	~CircleBody();
 
 	glm::f32 GetInertia() const;
+
+	glm::f32 GetRadius() const;
 };
 
