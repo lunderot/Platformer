@@ -4,6 +4,8 @@
 #include <map>
 #include <fstream>
 
+#include <glm/gtx/norm.hpp>
+
 #include "Entity.h"
 #include "Tile.h"
 #include "Camera.h"

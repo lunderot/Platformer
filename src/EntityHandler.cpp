@@ -60,6 +60,10 @@ void EntityHandler::Update(float deltaTime)
 						//Set the velocity to the reflection vector
 						glm::vec2 i = circle->GetVelocity();
 						circle->SetVelocity(i - 2.0f * normal * glm::dot(normal, i) * 0.8f);
+
+						//Move the circle back to not collide with the line again
+						glm::f32 moveBackDistance = 0.1f;
+						circle->SetPosition(circle->GetPosition() + glm::normalize(i) * moveBackDistance * -1.0f);
 					}
 					
 				}

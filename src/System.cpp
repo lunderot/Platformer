@@ -34,7 +34,7 @@ System::~System()
 
 void System::Run()
 {
-	float deltaTime = 1 / 60.0f;
+	float deltaTime = 1 / 120.0f;
 	float renderTime = 0.0f;
 
 	while (running)
