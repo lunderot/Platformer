@@ -28,49 +28,70 @@ void EntityHandler::Update(float deltaTime)
 		CircleBody* circle = dynamic_cast<CircleBody*>(i->second->GetPhysicsBody());
 		if (circle)
 		{
-			glm::f32 radius = circle->GetRadius();
-			glm::vec2 center = circle->GetPosition();
 			for (std::vector<LineSegment*>::iterator c = collisionLines.begin(); c != collisionLines.end(); ++c)
 			{
-				glm::vec2 point0 = (*c)->point[0];
-				glm::vec2 point1 = (*c)->point[1];
-
-				glm::vec2 normal(	
-									(point1.y - point0.y)*-1.0f,
-									(point1.x - point0.x)
-								);
-				normal = glm::normalize(normal);
-
-				glm::f32 distance = glm::abs(glm::dot(center - point0, normal));
-				
-				if (distance < radius)
-				{
-					glm::vec2 line = point1 - point0;
-					glm::f32 len = glm::length(line);
-					glm::vec2 b = glm::normalize(line);
-					glm::vec2 proj = glm::dot(center - point0, b) * b;
-
-					
-					glm::f32 result = glm::dot(line, proj) / len;
-
-					if (result > -1.0f * radius &&
-						result < len + radius)
-					{
-						//Collision has occurred
-						//Set the velocity to the reflection vector
-						glm::vec2 i = circle->GetVelocity();
-						circle->SetVelocity(i - 2.0f * normal * glm::dot(normal, i) * 0.8f);
-
-						//Move the circle back to not collide with the line again
-						glm::f32 moveBackDistance = 0.1f;
-						circle->SetPosition(circle->GetPosition() + glm::normalize(i) * moveBackDistance * -1.0f);
-					}
-					
-				}
-				
+				CircleLineCollision(circle, *c);	
 			}
+		}	
+	}
+	for (std::map<unsigned int, Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+	{
+		CircleBody* circle = dynamic_cast<CircleBody*>(i->second->GetPhysicsBody());
+		if (circle)
+		{
+			//Check collision with circle and flippers
+			for (std::map<unsigned int, Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
+			{
+				Flipper* flipper = dynamic_cast<Flipper*>(i->second);
+				if (flipper)
+				{
+					LineBody* flipperBody = dynamic_cast<LineBody*>(flipper->GetPhysicsBody());
+					if (flipperBody)
+					{
+						glm::f32 length = flipperBody->GetLength();
+						glm::f32 angle = flipperBody->GetAngle();
 
-			
+						glm::f32 radius = circle->GetRadius();
+						glm::vec2 center = circle->GetPosition();
+						glm::vec2 point0 = flipperBody->GetPosition();
+						glm::vec2 point1(
+											point0.x + glm::cos(angle) * length,
+											point0.y + glm::sin(angle) * length
+										);
+
+						glm::vec2 normal(
+							(point1.y - point0.y)*-1.0f,
+							(point1.x - point0.x)
+							);
+						normal = glm::normalize(normal);
+
+						glm::f32 distance = glm::abs(glm::dot(center - point0, normal));
+
+						if (distance < radius)
+						{
+							glm::vec2 line = point1 - point0;
+							glm::f32 len = glm::length(line);
+							glm::vec2 b = glm::normalize(line);
+							glm::vec2 proj = glm::dot(center - point0, b) * b;
+
+
+							glm::f32 result = glm::dot(line, proj) / len;
+
+							if (result > -1.0f * radius &&
+								result < len + radius)
+							{
+								glm::f32 r = result;
+								glm::f32 i = flipperBody->GetInertia();
+								glm::f32 w = flipperBody->GetAngularVelocity();
+								glm::f32 m = circle->GetMass();
+								glm::vec2 resultVelocity = ((i*w) / r*m) * normal;
+								
+								circle->SetVelocity(resultVelocity);
+							}
+						}
+					}
+				}
+			}
 		}
 		i->second->Update(deltaTime);
 	}
@@ -128,7 +149,7 @@ int EntityHandler::Add(EntityType type, std::string textureFilename, float radiu
 	switch (type)
 	{
 	case PLAYER:
-		entity = new Player(assetHandler->GetTexture(textureFilename), radius, 10);
+		entity = new Player(assetHandler->GetTexture(textureFilename), radius, 0.13);
 		break;
 	case TILE:
 		entity = new Tile(assetHandler->GetTexture(textureFilename), radius);

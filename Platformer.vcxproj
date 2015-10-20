@@ -92,6 +92,7 @@
     <ClCompile Include="src\math\Math.cpp" />
     <ClCompile Include="src\physics\Body.cpp" />
     <ClCompile Include="src\physics\CircleBody.cpp" />
+    <ClCompile Include="src\physics\Common.cpp" />
     <ClCompile Include="src\physics\LineBody.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\ScriptHandler.cpp" />
@@ -118,6 +119,7 @@
     <ClInclude Include="include\math\LineSegment.h" />
     <ClInclude Include="include\math\Math.h" />
     <ClInclude Include="include\physics\AngularImpulse.h" />
+    <ClInclude Include="include\physics\Common.h" />
     <ClInclude Include="include\physics\LineBody.h" />
     <ClInclude Include="include\physics\Moment.h" />
     <ClInclude Include="include\physics\Body.h" />

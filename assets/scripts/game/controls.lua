@@ -1,5 +1,5 @@
 SetPosition(GetFirstPlayerId(), 390.167, 400)
-ApplyForce(GetFirstPlayerId(), 0, 9000)
+ApplyForce(GetFirstPlayerId(), 0, 90)
 local controls =	{
 						reset	= GetKeyCodeFromName("R")
 					}

@@ -11,6 +11,8 @@
 #include "Camera.h"
 #include "Player.h"
 #include "Marker.h"
+#include "Flipper.h"
+#include "physics/Common.h"
 
 #include "AssetHandler.h"
 

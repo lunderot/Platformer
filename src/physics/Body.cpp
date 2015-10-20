@@ -138,9 +138,34 @@ glm::vec2 Body::GetAcceleration() const
 	return acceleration;
 }
 
+void Body::SetAngle(glm::f32 angle)
+{
+	this->angle = angle;
+}
+
 glm::f32 Body::GetAngle() const
 {
 	return angle;
+}
+
+void Body::SetAngularVelocity(glm::f32 angularVelocity)
+{
+	this->angularVelocity = angularVelocity;
+}
+
+glm::f32 Body::GetAngularVelocity() const
+{
+	return angularVelocity;
+}
+
+void Body::SetAngularAcceleration(glm::f32 angularAcceleration)
+{
+	this->angularAcceleration = angularAcceleration;
+}
+
+glm::f32 Body::GetAngularAcceleration() const
+{
+	return angularAcceleration;
 }
 
 glm::f32 Body::GetMass() const
