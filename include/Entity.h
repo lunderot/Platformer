@@ -13,7 +13,8 @@ enum EntityType
 	PLAYER,
 	TILE,
 	CAMERA,
-	MARKER
+	MARKER,
+	FLIPPER
 };
 
 class Entity

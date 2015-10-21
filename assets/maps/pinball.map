@@ -1,6 +1,7 @@
 e 0 assets/textures/circle.png 5
 s assets/scripts/game/camera.lua
 s assets/scripts/game/controls.lua
+s assets/scripts/game/pinball.lua
 
 l 0 200 0 700
 l 400 200 400 700

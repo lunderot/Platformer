@@ -13,9 +13,12 @@ void CircleLineCollision(CircleBody* circle, LineSegment* line)
 		);
 	normal = glm::normalize(normal);
 
-	glm::f32 distance = glm::abs(glm::dot(center - point0, normal));
+	glm::f32 distance = glm::dot(center - point0, normal);
 
-	if (distance < radius)
+	//Always point the normal towards the circle
+	normal = normal * glm::sign(distance);
+
+	if (glm::abs(distance) < radius)
 	{
 		glm::vec2 line = point1 - point0;
 		glm::f32 len = glm::length(line);
@@ -34,7 +37,7 @@ void CircleLineCollision(CircleBody* circle, LineSegment* line)
 			circle->SetVelocity(i - 2.0f * normal * glm::dot(normal, i) * 0.8f);
 
 			//Move the circle back to not collide with the line again
-			glm::f32 moveBackDistance = 0.1f;
+			glm::f32 moveBackDistance = 1.0f;
 			circle->SetPosition(circle->GetPosition() + glm::normalize(i) * moveBackDistance * -1.0f);
 		}
 

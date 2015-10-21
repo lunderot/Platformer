@@ -65,9 +65,9 @@ void EntityHandler::Update(float deltaTime)
 							);
 						normal = glm::normalize(normal);
 
-						glm::f32 distance = glm::abs(glm::dot(center - point0, normal));
+						glm::f32 distance = glm::dot(center - point0, normal);
 
-						if (distance < radius)
+						if (glm::abs(distance) < radius)
 						{
 							glm::vec2 line = point1 - point0;
 							glm::f32 len = glm::length(line);
@@ -80,13 +80,35 @@ void EntityHandler::Update(float deltaTime)
 							if (result > -1.0f * radius &&
 								result < len + radius)
 							{
-								glm::f32 r = result;
-								glm::f32 i = flipperBody->GetInertia();
 								glm::f32 w = flipperBody->GetAngularVelocity();
-								glm::f32 m = circle->GetMass();
-								glm::vec2 resultVelocity = ((i*w) / r*m) * normal;
 								
-								circle->SetVelocity(resultVelocity);
+								if (glm::sign(glm::dot(normal, circle->GetVelocity())) != glm::sign(w))
+								{
+									glm::f32 r = result;
+									glm::f32 i = flipperBody->GetInertia();
+									glm::f32 m = circle->GetMass();
+
+									//Calculate the cirle's speed acording to the flippers rotation speed
+									glm::vec2 resultVelocity = ((i*w) / r*m) * normal;
+									circle->SetVelocity(resultVelocity * 100.0f);
+
+									//Move the circle back to not collide with the line again
+									glm::f32 moveBackDistance = 1.0f;
+									circle->SetPosition(circle->GetPosition() + normal*glm::sign(w) * moveBackDistance);
+								}
+								else
+								{
+									//Point the normal towards the circle
+									normal = normal * glm::sign(distance);
+									//Collision has occurred
+									//Set the velocity to the reflection vector
+									glm::vec2 i = circle->GetVelocity();
+									circle->SetVelocity(i - 2.0f * normal * glm::dot(normal, i) * 0.8f);
+
+									//Move the circle back to not collide with the line again
+									glm::f32 moveBackDistance = 0.1f;
+									circle->SetPosition(circle->GetPosition() + glm::normalize(i) * moveBackDistance * -1.0f);
+								}
 							}
 						}
 					}
@@ -149,13 +171,16 @@ int EntityHandler::Add(EntityType type, std::string textureFilename, float radiu
 	switch (type)
 	{
 	case PLAYER:
-		entity = new Player(assetHandler->GetTexture(textureFilename), radius, 0.13);
+		entity = new Player(assetHandler->GetTexture(textureFilename), radius, 0.13f);
 		break;
 	case TILE:
 		entity = new Tile(assetHandler->GetTexture(textureFilename), radius);
 		break;
 	case MARKER:
 		entity = new Marker(assetHandler->GetTexture(textureFilename), radius);
+		break;
+	case FLIPPER:
+		entity = new Flipper(assetHandler->GetTexture(textureFilename), radius, 0.1f);
 		break;
 	default:
 		break;

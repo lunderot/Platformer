@@ -71,6 +71,14 @@ void Body::Update(glm::f32 deltaTime)
 	angularAcceleration = totalMoment / GetInertia();
 	angularVelocity += angularAcceleration * deltaTime;
 	angle += angularVelocity * deltaTime;
+	if (angle >= glm::two_pi<glm::f32>())
+	{
+		angle = 0.0f;
+	}
+	else if (angle <= 0.0f)
+	{
+		angle = glm::two_pi<glm::f32>();
+	}
 }
 
 void Body::ApplyForce(glm::vec2 force, glm::vec2 offset)

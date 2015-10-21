@@ -34,7 +34,13 @@ ScriptHandler::ScriptHandler(EntityHandler* entityHandler, AssetHandler* assetHa
 
 	AddFunction(ScriptHandlerInternal::GetPosition, "GetPosition");
 	AddFunction(ScriptHandlerInternal::SetPosition, "SetPosition");
+	AddFunction(ScriptHandlerInternal::GetVelocity, "GetVelocity");
+	AddFunction(ScriptHandlerInternal::SetVelocity, "SetVelocity");
 	AddFunction(ScriptHandlerInternal::GetAngle, "GetAngle");
+	AddFunction(ScriptHandlerInternal::SetAngle, "SetAngle");
+
+	AddFunction(ScriptHandlerInternal::GetAngularVelocity, "GetAngularVelocity");
+	AddFunction(ScriptHandlerInternal::SetAngularVelocity, "SetAngularVelocity");
 
 	AddFunction(ScriptHandlerInternal::SetMarkerTexture, "SetMarkerTexture");
 }

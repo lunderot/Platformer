@@ -246,6 +246,41 @@ namespace ScriptHandlerInternal
 		return 0;
 	}
 
+	static int GetVelocity(lua_State* ls) //x,y = GetVelocity(id)
+	{
+		int id = static_cast<int>(luaL_checknumber(ls, 1));
+		glm::vec2 velocity;
+
+		Entity* entity = entityHandler->GetEntity(id);
+		if (entity)
+		{
+			Body* body = entity->GetPhysicsBody();
+			if (body)
+			{
+				velocity = body->GetVelocity();
+			}
+		}
+		lua_pushnumber(ls, velocity.x);
+		lua_pushnumber(ls, velocity.y);
+		return 2;
+	}
+	static int SetVelocity(lua_State* ls) //SetVelocity(id, x, y)
+	{
+		int id = static_cast<int>(luaL_checknumber(ls, 1));
+		glm::vec2 velocity(static_cast<glm::f32>(luaL_checknumber(ls, 2)), static_cast<glm::f32>(luaL_checknumber(ls, 3)));
+
+		Entity* entity = entityHandler->GetEntity(id);
+		if (entity)
+		{
+			Body* body = entity->GetPhysicsBody();
+			if (body)
+			{
+				body->SetVelocity(velocity);
+			}
+		}
+		return 0;
+	}
+
 	static int GetAngle(lua_State* ls) //a = GetAngle(id)
 	{
 		int id = static_cast<int>(luaL_checknumber(ls, 1));
@@ -262,6 +297,56 @@ namespace ScriptHandlerInternal
 		}
 		lua_pushnumber(ls, angle);
 		return 1;
+	}
+
+	static int SetAngle(lua_State* ls) //SetAngle(id, angle)
+	{
+		int id = static_cast<int>(luaL_checknumber(ls, 1));
+		glm::f32 angle = static_cast<glm::f32>(luaL_checknumber(ls, 2));
+		Entity* entity = entityHandler->GetEntity(id);
+		if (entity)
+		{
+			Body* body = entity->GetPhysicsBody();
+			if (body)
+			{
+				body->SetAngle(angle);
+			}
+		}
+		return 0;
+	}
+
+	static int GetAngularVelocity(lua_State* ls) //angularVelocity = GetAngularVelocity(id)
+	{
+		int id = static_cast<int>(luaL_checknumber(ls, 1));
+		glm::f32 angularVelocity;
+
+		Entity* entity = entityHandler->GetEntity(id);
+		if (entity)
+		{
+			Body* body = entity->GetPhysicsBody();
+			if (body)
+			{
+				angularVelocity = body->GetAngularVelocity();
+			}
+		}
+		lua_pushnumber(ls, angularVelocity);
+		return 1;
+	}
+
+	static int SetAngularVelocity(lua_State* ls) //SetAngularVelocity(id, angularVelocity)
+	{
+		int id = static_cast<int>(luaL_checknumber(ls, 1));
+		glm::f32 angularVelocity = static_cast<glm::f32>(luaL_checknumber(ls, 2));
+		Entity* entity = entityHandler->GetEntity(id);
+		if (entity)
+		{
+			Body* body = entity->GetPhysicsBody();
+			if (body)
+			{
+				body->SetAngularVelocity(angularVelocity);
+			}
+		}
+		return 0;
 	}
 
 	//Marker functions
